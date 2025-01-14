@@ -1,0 +1,14 @@
+diff --git a/rofirefox.sh b/rofirefox.sh
+index e217a30..85068c1 100644
+--- a/rofirefox.sh
++++ b/rofirefox.sh
+@@ -2,7 +2,7 @@
+ 
+ CONFIG_PATH=~/.mozilla/firefox/profiles.ini
+ 
+-choice=$(awk -F "=" '/Name/ { print $2 }' $CONFIG_PATH | sort | rofi -dmenu -p "Select a profile...")
++choice=$(awk -F "=" '/Name/ { print $2 }' $CONFIG_PATH | sort | rofi -dmenu -p "Select a profile... " -i)
+ if [ "$choice" != "" ]; then
+     firefox -P $choice &
+ else
+

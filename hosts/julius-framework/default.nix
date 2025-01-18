@@ -8,10 +8,9 @@
   imports =
     [
       ../../modules/nix.nix
-      ../../modules/system.nix
       ../../modules/firmware.nix
       ../../modules/laptop.nix
-      ../../modules/network.nix
+      ../../modules/network-client.nix
       ../../modules/locale.nix
       ../../modules/timezone-imperatively.nix
       ../../modules/boot-login.nix

@@ -72,7 +72,19 @@
               home-manager.users.${username} = import ./users/${username}/home.nix;
             }
         ];
+      };
 
+      backup-raspberrypi = nixpkgs.lib.nixosSystem rec {
+        system = "aarch64";
+
+        specialArgs = {
+          inherit inputs outputs;
+        };
+
+        modules = [
+          nixos-hardware.nixosModules.raspberry-pi-4
+          ./hosts/backup-raspberrypi
+        ];
       };
     };
   };

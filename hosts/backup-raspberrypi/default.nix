@@ -35,6 +35,8 @@
       fsType = "btrfs";
     };
 
+  services.btrfs.autoScrub.enable = true;
+
   networking.hostName = "backup-raspberry"; # Define your hostname.
 
   users = {

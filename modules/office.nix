@@ -5,6 +5,10 @@
 }: {
   environment.systemPackages = with pkgs; [
     libreoffice-fresh
+    hunspell hyphen
+    hunspellDicts.en_US hyphenDicts.en_US
+    hunspellDicts.de_DE hyphenDicts.de_DE
+
     xournalpp
 
     system-config-printer

@@ -6,7 +6,7 @@
   environment.systemPackages = with pkgs; [
     remmina
 
-    teleport_16
+    teleport.client
   ];
 
 }

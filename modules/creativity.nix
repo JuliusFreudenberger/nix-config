@@ -4,7 +4,7 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    #gimp-with-plugins
+    gimp-with-plugins
     inkscape-with-extensions
     darktable
     hugin

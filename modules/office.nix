@@ -24,7 +24,7 @@
     enable = true;
     drivers = with pkgs; [ 
       gutenprint
-      #epson-escpr
+      epson-escpr
       epson-escpr2
     ];
   };

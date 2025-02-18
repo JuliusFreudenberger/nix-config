@@ -1,4 +1,4 @@
-{config, pkgs, pkgs-unstable, ...}: {
+{lib, config, pkgs, pkgs-unstable, ...}: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -23,7 +23,7 @@
 
     initExtra = ''
       setopt promptsubst
-      export PROMPT='%F{12}[%f%F{10}%n%f%F{12}@%f%F{white}%m%f%F{12}]%f%F{white}:%f %F{white}%~%f%F{12}>%b$(${pkgs-unstable.gitprompt-rs}/bin/gitprompt-rs)%f%F{10}%(!.#.$)%f '
+      export PROMPT='%F{12}[%f%F{10}%n%f%F{12}@%f%F{white}%m%f%F{12}]%f%F{white}:%f %F{white}%~%f%F{12}>%b$(${lib.getExe pkgs-unstable.gitprompt-rs} zsh)%f%F{10}%(!.#.$)%f '
       unsetopt beep
       bindkey '^R' history-incremental-search-backward
     '';

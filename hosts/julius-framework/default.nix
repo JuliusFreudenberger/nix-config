@@ -32,6 +32,7 @@
       ../../modules/typesetting.nix
       ../../modules/docker.nix
       ../../modules/distrobox.nix
+      ../../modules/virtualization.nix
       ../../modules/gui-coding.nix
       ../../modules/optical-media.nix
       ../../modules/flatpak.nix

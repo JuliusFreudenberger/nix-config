@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-     nemo-with-nextcloud-extensions = pkgs.nemo-with-extensions.override { extensions = [pkgs.nextcloud-client];};
+     nemo-with-nextcloud-extensions = pkgs.nemo-with-extensions.override { extensions = [ pkgs.nextcloud-client pkgs.nemo-engrampa ];};
   in {
   environment.systemPackages = with pkgs; [
     sakura

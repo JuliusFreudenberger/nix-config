@@ -12,6 +12,7 @@
     environment.systemPackages = [ cfg.package ];
 
     services.teleport = {
+      package = pkgs.teleport_17;
       settings = {
         teleport = {
           nodename = config.networking.hostName;

@@ -9,6 +9,8 @@
     hunspellDicts.en_US hyphenDicts.en_US
     hunspellDicts.de_DE hyphenDicts.de_DE
 
+    pdfarranger
+
     xournalpp
 
     system-config-printer

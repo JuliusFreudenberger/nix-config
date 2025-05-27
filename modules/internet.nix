@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
   lib,
   ...
 }: {
@@ -8,7 +7,7 @@
     transmission_4
     filezilla
 
-    pkgs-unstable.element-desktop
+    element-desktop
   ];
 
   programs = {

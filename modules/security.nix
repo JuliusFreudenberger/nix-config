@@ -1,11 +1,10 @@
 {
   pkgs,
-  pkgs-unstable,
   lib,
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    pkgs-unstable.cryptomator
+    cryptomator
 
     keepassxc
   ];

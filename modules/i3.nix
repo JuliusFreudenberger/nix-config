@@ -34,6 +34,7 @@
 
 	scrot
         i3-scrot
+        rofi-screenshot
 	rofirefox
 	rofi-rbw
 	rbw

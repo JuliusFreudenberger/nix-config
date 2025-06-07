@@ -49,6 +49,8 @@
       ];
     };
 
+  hardware.enableRedistributableFirmware = true;
+
   # Bootloader.
   boot = {
       loader = {

@@ -13,6 +13,10 @@
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lazy-apps = {
+      url = "sourcehut:~rycee/lazy-apps";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     systems.url = "github:nix-systems/default-linux";
   };

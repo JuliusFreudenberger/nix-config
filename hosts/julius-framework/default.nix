@@ -44,6 +44,7 @@
 
     nixpkgs = {
       overlays = [
+        inputs.lazy-apps.overlays.default
         outputs.overlays.additions
       ];
     };

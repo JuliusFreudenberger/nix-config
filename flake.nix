@@ -90,6 +90,18 @@
           ./hosts/backup-raspberrypi
         ];
       };
+
+      server = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+
+        specialArgs = {
+          inherit inputs outputs;
+        };
+
+        modules = [
+          ./hosts/nixos-server-test
+        ];
+      };
     };
   };
 }

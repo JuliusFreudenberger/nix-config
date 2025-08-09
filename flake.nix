@@ -17,6 +17,7 @@
       url = "sourcehut:~rycee/lazy-apps";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
 
     systems.url = "github:nix-systems/default-linux";
   };
@@ -28,6 +29,7 @@
     nixos-hardware,
     home-manager,
     auto-cpufreq,
+    proxmox-nixos,
     systems,
     ...
   } @ inputs: let
@@ -100,6 +102,13 @@
 
         modules = [
           ./hosts/nixos-server-test
+          proxmox-nixos.nixosModules.proxmox-ve
+
+          ({...}: {
+            nixpkgs.overlays = [
+              proxmox-nixos.overlays.${system}
+            ];
+          })
         ];
       };
     };

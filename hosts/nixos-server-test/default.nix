@@ -7,7 +7,6 @@
       ../../modules/network-server.nix
       ../../modules/locale.nix
       ../../modules/server-cli.nix
-      ../../modules/nix.nix
       ../../modules/sshd.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -39,6 +38,33 @@
   services.proxmox-ve = {
     enable = true;
     ipAddress = "192.168.122.42";
+
+    # Make vmbr0 bridge visible in Proxmox web interface
+    bridges = [ "vmbr0" ];
+  };
+
+  # Actually set up the vmbr0 bridge
+  systemd.network.networks."10-lan" = {
+    matchConfig.Name = [ "ens18" ];
+    networkConfig = {
+      Bridge = "vmbr0";
+    };
+  };
+
+  systemd.network.netdevs."vmbr0" = {
+    netdevConfig = {
+      Name = "vmbr0";
+      Kind = "bridge";
+    };
+  };
+
+  systemd.network.networks."10-lan-bridge" = {
+    matchConfig.Name = "vmbr0";
+    networkConfig = {
+      IPv6AcceptRA = true;
+      DHCP = "ipv4";
+    };
+    linkConfig.RequiredForOnline = "routable";
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

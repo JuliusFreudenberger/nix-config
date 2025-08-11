@@ -42,52 +42,10 @@
     bridges = [ "vmbr0" ];
   };
 
-  networking.useDHCP = false;
-
-  systemd.network = {
-    enable = true;
-
-    links."10-wan" = {
-        matchConfig.Path = "pci-0000:01:00.0";
-        linkConfig.Name = "wan";
-    };
-
-    networks."10-wan" = {
-      matchConfig.Name = "enp1s0";
-      networkConfig = {
-        # start a DHCP Client for IPv4 Addressing/Routing
-        DHCP = "ipv4";
-        # accept Router Advertisements for Stateless IPv6 Autoconfiguraton (SLAAC)
-        IPv6AcceptRA = true;
-      };
-      # make routing on this interface a dependency for network-online.target
-      linkConfig.RequiredForOnline = "routable";
-    };
-
-
-    # Actually set up the vmbr0 bridge
-    networks."10-lan" = {
-      matchConfig.Name = [ "ens18" ];
-      networkConfig = {
-        Bridge = "vmbr0";
-      };
-    };
-
-    netdevs."vmbr0" = {
-      netdevConfig = {
-        Name = "vmbr0";
-        Kind = "bridge";
-      };
-    };
-
-    networks."10-lan-bridge" = {
-      matchConfig.Name = "vmbr0";
-      networkConfig = {
-        IPv6AcceptRA = true;
-        DHCP = "ipv4";
-      };
-      linkConfig.RequiredForOnline = "routable";
-    };
+  # Actually set up the vmbr0 bridge
+  networking = {
+    bridges.vmbr0.interfaces = [ "enp1s0" ];
+    interfaces.vmbr0.useDHCP = lib.mkDefault true;
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

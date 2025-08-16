@@ -6,6 +6,7 @@
       ../../modules/disko/efi-full-btrfs.nix
       ../../modules/systemd-boot.nix
 
+      ../../users/julius/nixos-server.nix
       ../../modules/nix.nix
       ../../modules/network-server.nix
       ../../modules/locale.nix
@@ -20,24 +21,6 @@
 
   networking.hostName = "kube01"; # Define your hostname.
 
-  users = {
-    users = {
-      julius = {
-        initialPassword = "password";
-        isNormalUser = true;
-        uid = 1000;
-        extraGroups = [ "wheel" "julius" ];
-        openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOiZXFM8XFkReb9HuGcY5rtPXsGuZ2eDnBBpI0kcHa6c julius@julius-framework"
-        ];
-      };
-    };
-    groups = {
-      julius = {
-        gid = 1000;
-      };
-    };
-  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

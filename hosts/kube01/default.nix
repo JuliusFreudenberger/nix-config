@@ -4,6 +4,7 @@
   imports =
     [
       ../../modules/disko/efi-full-btrfs.nix
+      ../../modules/systemd-boot.nix
 
       ../../modules/nix.nix
       ../../modules/network-server.nix
@@ -15,15 +16,6 @@
       ./hardware-configuration.nix
     ];
 
-  boot = {
-    loader = {
-      systemd-boot = {
-        enable = true;
-      };
-      efi.canTouchEfiVariables = true;
-    };
-    tmp.useTmpfs = true;
-  };
 
   networking.hostName = "kube01"; # Define your hostname.
 

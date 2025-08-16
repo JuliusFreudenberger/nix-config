@@ -18,6 +18,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     systems.url = "github:nix-systems/default-linux";
   };
@@ -30,6 +34,7 @@
     home-manager,
     auto-cpufreq,
     proxmox-nixos,
+    disko,
     systems,
     ...
   } @ inputs: let
@@ -111,6 +116,21 @@
           })
         ];
       };
+
+      kube01 = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+
+        specialArgs = {
+          inherit inputs outputs;
+        };
+
+        modules = [
+          disko.nixosModules.disko
+          ./hosts/kube01/disko-config.nix
+          ./hosts/kube01
+        ];
+      };
+
     };
   };
 }

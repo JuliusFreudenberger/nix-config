@@ -12,6 +12,7 @@
       ../../modules/server-cli.nix
       ../../modules/sshd.nix
       ../../modules/k3s.nix
+      ../../modules/qemu-guest.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];

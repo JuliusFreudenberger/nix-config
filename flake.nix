@@ -126,7 +126,6 @@
 
         modules = [
           disko.nixosModules.disko
-          ./hosts/kube01/disko-config.nix
           ./hosts/kube01
         ];
       };

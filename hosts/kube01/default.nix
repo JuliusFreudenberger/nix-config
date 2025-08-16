@@ -3,6 +3,8 @@
 {
   imports =
     [
+      ../../modules/disko/efi-full-btrfs.nix
+
       ../../modules/nix.nix
       ../../modules/network-server.nix
       ../../modules/locale.nix

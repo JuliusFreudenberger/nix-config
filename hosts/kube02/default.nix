@@ -20,6 +20,11 @@
 
   networking.hostName = "kube02"; # Define your hostname.
 
+  services.k3s = {
+    serverAddr = "https://kube01:6443";
+    clusterInit = false;
+  };
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   # Most users should NEVER change this value after the initial install, for any reason,

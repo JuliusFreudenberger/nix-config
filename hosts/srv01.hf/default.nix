@@ -4,7 +4,6 @@
   imports =
     [
       ../../modules/disko/efi-full-btrfs.nix
-      ../../modules/systemd-boot.nix
 
       ../../users/julius/nixos-server.nix
       ../../modules/nix.nix
@@ -18,6 +17,13 @@
       ./hardware-configuration.nix
     ];
 
+  boot = {
+    loader.grub = {
+      enable = true;
+      device = "/dev/sda";
+    };
+    tmp.useTmpfs = true;
+  };
 
   networking.hostName = "srv01-hf"; # Define your hostname.
 

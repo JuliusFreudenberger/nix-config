@@ -17,13 +17,6 @@
       ./hardware-configuration.nix
     ];
 
-  boot = {
-    loader.grub = {
-      enable = true;
-      device = "/dev/sda";
-    };
-    tmp.useTmpfs = true;
-  };
 
   networking.hostName = "srv01-hf"; # Define your hostname.
 

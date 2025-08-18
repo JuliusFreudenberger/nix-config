@@ -117,6 +117,19 @@
         ];
       };
 
+      srv01-hf = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+
+        specialArgs = {
+          inherit inputs outputs;
+        };
+
+        modules = [
+          disko.nixosModules.disko
+          ./hosts/srv01.hf
+        ];
+      };
+
       kube01 = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
 

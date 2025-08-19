@@ -17,6 +17,25 @@
       ./hardware-configuration.nix
     ];
 
+  systemd.network = {
+    enable = true;
+      networks."10-wan" = {
+      matchConfig.Name = "ens18";
+      networkConfig.DHCP = "no";
+      address = [
+        "77.90.17.93/24"
+        "2a06:de00:100:63::2/64"
+      ];
+      routes = [
+        { Gateway = "77.90.17.1"; }
+        { Gateway = "2a06:de00:100::1"; GatewayOnLink = true; }
+      ];
+      dns = [ "9.9.9.9" ];
+    };
+  };
+
+  # Disable classic networking configuration
+  networking.useDHCP = lib.mkForce false;
 
   networking.hostName = "srv01-hf"; # Define your hostname.
 

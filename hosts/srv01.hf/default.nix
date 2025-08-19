@@ -13,6 +13,7 @@
       ../../modules/sshd.nix
       ../../modules/qemu-guest.nix
       ../../modules/docker.nix
+      ../../modules/auto-upgrade.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];

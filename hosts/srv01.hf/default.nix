@@ -6,6 +6,7 @@
       ../../modules/disko/efi-full-btrfs.nix
 
       ../../users/julius/nixos-server.nix
+      ../../users/nixremote.nix
       ../../modules/nix.nix
       ../../modules/network-server.nix
       ../../modules/locale.nix

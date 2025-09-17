@@ -16,6 +16,7 @@
       ../../modules/qemu-guest.nix
       ../../modules/docker.nix
       ../../modules/teleport.nix
+      ../../modules/portainer_agent.nix
       ../../modules/auto-upgrade.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -29,6 +30,8 @@
       auth_token = config.age.secrets."teleport-join_token".path;
     };
   };
+
+  virtualisation.oci-containers.containers.portainer_agent.environmentFiles = [ config.age.secrets."portainer-join_token".path ];
 
   systemd.network = {
     enable = true;

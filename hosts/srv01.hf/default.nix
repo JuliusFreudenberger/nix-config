@@ -15,10 +15,20 @@
       ../../modules/sshd.nix
       ../../modules/qemu-guest.nix
       ../../modules/docker.nix
+      ../../modules/teleport.nix
       ../../modules/auto-upgrade.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+
+  services.openssh.openFirewall = false;
+  services.teleport = {
+    enable = true;
+    settings.teleport = {
+      ca_pin = config.age.secrets."teleport-ca_pin".path;
+      auth_token = config.age.secrets."teleport-join_token".path;
+    };
+  };
 
   systemd.network = {
     enable = true;

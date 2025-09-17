@@ -22,7 +22,17 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        darwin.follows = "";
+      };
+    };
+    secrets = {
+      url = "git+ssh://git@git.jfreudenberger.de/JuliusFreudenberger/nix-private.git";
+      flake = false;
+    };
     systems.url = "github:nix-systems/default-linux";
   };
 
@@ -34,6 +44,7 @@
     home-manager,
     auto-cpufreq,
     proxmox-nixos,
+    agenix,
     disko,
     systems,
     ...
@@ -126,6 +137,7 @@
 
         modules = [
           disko.nixosModules.disko
+          agenix.nixosModules.default
           ./hosts/srv01.hf
         ];
       };

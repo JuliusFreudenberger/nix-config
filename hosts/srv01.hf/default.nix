@@ -4,6 +4,7 @@
   imports =
     [
       ../../modules/disko/efi-full-btrfs.nix
+      ./secrets.nix
 
       ../../users/julius/nixos-server.nix
       ../../users/nixremote.nix

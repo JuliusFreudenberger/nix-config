@@ -1,6 +1,15 @@
 {
   description = "NixOS configuration of Julius Freudenberger";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://cache.saumon.network/proxmox-nixos"
+    ];
+    extra-trusted-public-keys = [
+      "proxmox-nixos:D9RYSWpQQC/msZUWphOY2I5RLH5Dd6yQcaHIuug7dWM="
+    ];
+  };
+
   inputs = {
     #nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";

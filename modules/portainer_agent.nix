@@ -3,7 +3,7 @@
 }: {
   virtualisation.oci-containers.containers = {
     portainer_agent = {
-      image = "portainer/agent:2.33.1";
+      image = "portainer/agent:2.33.2";
       volumes = [
         "/var/run/docker.sock:/var/run/docker.sock"
         "/var/lib/docker/volumes:/var/lib/docker/volumes"

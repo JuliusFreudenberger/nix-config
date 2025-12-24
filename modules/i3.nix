@@ -18,7 +18,7 @@
 	lightlocker
         xautolock # lock screen after some time
         i3status # provide information to i3bar
-        i3-gaps # i3 with gaps
+        i3 # i3 with gaps
         nitrogen # set wallpaper
         acpi # battery information
         arandr # screen layout manager

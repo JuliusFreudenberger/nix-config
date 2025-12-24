@@ -4,8 +4,8 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    jetbrains.idea-ultimate
-    jetbrains.pycharm-professional
+    jetbrains.idea
+    jetbrains.pycharm
 
     vscodium-fhs
     zed-editor.fhs

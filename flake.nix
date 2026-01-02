@@ -164,6 +164,7 @@
 
         modules = [
           home/core.nix
+          modules/nix.nix
           home/neovim/default.nix
           home/zsh/default.nix
         ];

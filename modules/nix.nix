@@ -5,6 +5,7 @@
 }: {
   # do garbage collection weekly to keep disk usage low
   nix = {
+    package = pkgs.nix;
     settings = {
       experimental-features = ["nix-command" "flakes"];
     };

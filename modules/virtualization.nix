@@ -3,12 +3,13 @@
   lib,
   ...
 }: {
-  environment.systemPackages = with pkgs; [
-    virt-manager
-  ];
-
   virtualisation = {
-    libvirtd.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu.swtpm.enable = true;
+    };
     spiceUSBRedirection.enable = true;
   };
+
+  programs.virt-manager.enable = true;
 }

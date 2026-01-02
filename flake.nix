@@ -152,5 +152,24 @@
       };
 
     };
+
+    homeConfigurations = {
+      jufr2 = let
+        username = "jufr2";
+        system = "x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+
+        modules = [
+          home/core.nix
+          home/neovim/default.nix
+          home/zsh/default.nix
+        ];
+
+      };
+    };
+
   };
 }

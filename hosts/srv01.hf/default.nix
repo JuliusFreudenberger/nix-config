@@ -17,6 +17,8 @@
       ../../modules/docker.nix
       ../../modules/teleport.nix
       ../../modules/portainer_agent.nix
+      ../../modules/arcane.nix
+      ../../modules/traefik.nix
       ../../modules/auto-upgrade.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -32,6 +34,45 @@
   };
 
   virtualisation.oci-containers.containers.portainer_agent.environmentFiles = [ config.age.secrets."portainer-join_token".path ];
+
+  services.traefik-docker = {
+    enable = true;
+    dashboardUrl = "traefik.juliusfr.eu";
+    dnsSecrets = [
+      config.age.secrets."netcup-dns"
+    ];
+    mTLSCaCertSecret = config.age.secrets."step-ca-crt";
+    oidcAuthProviderUrl = "https://login.juliusfr.eu";
+    oidcClients = {
+      traefik-dashboard = {
+        secret = config.age.secrets."traefik-oidc-auth";
+      };
+      immich = {
+        secret = config.age.secrets."immich-oidc-auth";
+        scopes = [
+          "openid"
+          "email"
+          "profile"
+        ];
+        enableBypassUsingClientCertificate = true;
+      };
+      arcane = {
+        secret = config.age.secrets."arcane-oidc-auth";
+        scopes = [
+          "openid"
+          "email"
+          "profile"
+          "groups"
+        ];
+      };
+    };
+  };
+
+  services.arcane = {
+    enable = true;
+    appUrl = "arcane.juliusfr.eu";
+    secretFile = config.age.secrets."arcane-secrets";
+  };
 
   systemd.network = {
     enable = true;

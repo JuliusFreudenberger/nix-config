@@ -65,6 +65,17 @@
           "groups"
         ];
       };
+      firefly = {
+        secret = config.age.secrets."firefly-oidc-auth";
+        scopes = [
+          "openid"
+          "email"
+        ];
+        useClaimsFromUserInfo = true;
+        headers = [
+          { Name = "FFIII-User"; Value = "{{`{{ .claims.email }}`}}"; }
+        ];
+      };
     };
   };
 

@@ -9,6 +9,7 @@
     immich-oidc-auth.file = "${inputs.secrets}/secrets/srv01-hf/immich-oidc-auth";
     arcane-oidc-auth.file = "${inputs.secrets}/secrets/srv01-hf/arcane-oidc-auth";
     arcane-secrets.file = "${inputs.secrets}/secrets/srv01-hf/arcane-secrets";
+    firefly-oidc-auth.file = "${inputs.secrets}/secrets/srv01-hf/firefly-oidc-auth";
     step-ca-crt.file = "${inputs.secrets}/secrets/step-ca/step-ca-crt";
   };
 }

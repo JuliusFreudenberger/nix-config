@@ -75,6 +75,27 @@ in {
               description = "Whether to allow bypassing OIDC protection when a verified client certificate is presented.";
               type = lib.types.bool;
             };
+            useClaimsFromUserInfo = lib.mkOption {
+              default = false;
+              description = "When enabled, an additional request to the provider's userinfo_endpoint is made to validate the token and to retrieve additional claims. The userinfo claims are merged directly into the token claims, with userinfo values overriding token values for non-security-critical claims.";
+              type = lib.types.bool;
+            };
+            headers = lib.mkOption {
+              default = [];
+              description = "Headers to be added to the upstream request. Templating is possible. Documentation can be found here: https://traefik-oidc-auth.sevensolutions.cc/docs/getting-started/middleware-configuration";
+              type = lib.types.listOf (lib.types.submodule {
+                options = {
+                  Name = lib.mkOption {
+                    description = "The name of the header which should be added to the upstream request.";
+                    type = lib.types.str;
+                  };
+                  Value = lib.mkOption {
+                    description = "The value of the header, which can use Go-Templates.";
+                    type = lib.types.str;
+                  };
+                };
+              });
+            };
           };
         }
       );
@@ -90,7 +111,7 @@ in {
           "--providers.docker.exposedByDefault=false"
           "--providers.docker.network=traefik"
           "--providers.file.directory=/dynamic-config"
-          "--log.level=DEBUG"
+          "--log.level=INFO"
           "--api=true"
           "--ping=true"
           "--entrypoints.web.address=:80"
@@ -143,11 +164,14 @@ in {
                   ClientId = ''{{ env "${mapOidcClientNameToEnv oidcClientName}_OIDC_AUTH_PROVIDER_CLIENT_ID" }}'';
                   ClientSecret = ''{{ env "${mapOidcClientNameToEnv oidcClientName}_OIDC_AUTH_PROVIDER_CLIENT_SECRET" }}'';
                   UsePkce = oidcClientConfig.usePkce;
+                  UseClaimsFromUserInfo = oidcClientConfig.useClaimsFromUserInfo;
                 };
                 Scopes = oidcClientConfig.scopes;
                 LoginUrl = ''{{ env "OIDC_AUTH_PROVIDER_URL" }}'';
               } // (lib.attrsets.optionalAttrs oidcClientConfig.enableBypassUsingClientCertificate {
                 BypassAuthenticationRule = "HeaderRegexp(`X-Forwarded-Tls-Client-Cert`, `.+`)";
+              }) // (lib.attrsets.optionalAttrs ((lib.length oidcClientConfig.headers) > 0) {
+                Headers = oidcClientConfig.headers;
               });
             }
           ) cfg.oidcClients;

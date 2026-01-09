@@ -162,6 +162,10 @@
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
+        extraSpecialArgs = {
+          inherit username;
+        };
+
         modules = [
           home/core.nix
           modules/nix.nix

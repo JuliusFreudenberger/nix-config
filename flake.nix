@@ -168,6 +168,9 @@
 
         modules = [
           home/core.nix
+
+          home/targets/genericLinux.nix
+
           modules/nix.nix
           home/neovim/default.nix
           home/zsh/default.nix

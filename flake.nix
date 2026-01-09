@@ -174,6 +174,7 @@
           modules/nix.nix
           home/neovim/default.nix
           home/zsh/default.nix
+          home/cli.nix
         ];
 
       };

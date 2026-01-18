@@ -6,7 +6,10 @@
   virtualisation = {
     libvirtd = {
       enable = true;
-      qemu.swtpm.enable = true;
+      qemu = {
+        swtpm.enable = true;
+        vhostUserPackages = [ pkgs.virtiofsd ];
+      };
     };
     spiceUSBRedirection.enable = true;
   };

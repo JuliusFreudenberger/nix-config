@@ -151,45 +151,6 @@
         ];
       };
 
-      kube01 = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-
-        specialArgs = {
-          inherit inputs outputs;
-        };
-
-        modules = [
-          disko.nixosModules.disko
-          ./hosts/kube01
-        ];
-      };
-
-      kube02 = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-
-        specialArgs = {
-          inherit inputs outputs;
-        };
-
-        modules = [
-          disko.nixosModules.disko
-          ./hosts/kube02
-        ];
-      };
-
-      kube03 = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-
-        specialArgs = {
-          inherit inputs outputs;
-        };
-
-        modules = [
-          disko.nixosModules.disko
-          ./hosts/kube03
-        ];
-      };
-
     };
   };
 }

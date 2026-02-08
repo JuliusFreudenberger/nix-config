@@ -17,8 +17,9 @@
       ../../modules/docker.nix
       ../../modules/teleport.nix
       ../../modules/portainer_agent.nix
-      ../../modules/arcane.nix
-      ../../modules/traefik.nix
+      ../../modules/pangolin.nix
+      ../../modules/newt.nix
+      ../../modules/dockhand.nix
       ../../modules/auto-upgrade.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -35,54 +36,27 @@
 
   virtualisation.oci-containers.containers.portainer_agent.environmentFiles = [ config.age.secrets."portainer-join_token".path ];
 
-  services.traefik-docker = {
-    enable = true;
-    dashboardUrl = "traefik.juliusfr.eu";
-    dnsSecrets = [
-      config.age.secrets."netcup-dns"
-    ];
-    mTLSCaCertSecret = config.age.secrets."step-ca-crt";
-    oidcAuthProviderUrl = "https://login.juliusfr.eu";
-    oidcClients = {
-      traefik-dashboard = {
-        secret = config.age.secrets."traefik-oidc-auth";
-      };
-      immich = {
-        secret = config.age.secrets."immich-oidc-auth";
-        scopes = [
-          "openid"
-          "email"
-          "profile"
-        ];
-        enableBypassUsingClientCertificate = true;
-      };
-      arcane = {
-        secret = config.age.secrets."arcane-oidc-auth";
-        scopes = [
-          "openid"
-          "email"
-          "profile"
-          "groups"
-        ];
-      };
-      firefly = {
-        secret = config.age.secrets."firefly-oidc-auth";
-        scopes = [
-          "openid"
-          "email"
-        ];
-        useClaimsFromUserInfo = true;
-        headers = [
-          { Name = "FFIII-User"; Value = "{{`{{ .claims.email }}`}}"; }
-        ];
-      };
+  services = {
+    pangolin = {
+      dnsProvider = "netcup";
+      baseDomain = "juliusfr.eu";
+      letsEncryptEmail = "contact@jfreudenberger.de";
+      environmentFile = config.age.secrets."pangolin".path;
+    };
+    traefik = {
+      environmentFiles = [ config.age.secrets."netcup-dns".path ];
     };
   };
 
-  services.arcane = {
+  services.newt-docker = {
     enable = true;
-    appUrl = "arcane.juliusfr.eu";
-    secretFile = config.age.secrets."arcane-secrets";
+    pangolinEndpoint = "https://pangolin.juliusfr.eu";
+    connectionSecret = config.age.secrets."newt";
+  };
+
+  services.dockhand = {
+    enable = true;
+    appUrl = "dockhand.juliusfr.eu";
   };
 
   systemd.network = {

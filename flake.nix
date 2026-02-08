@@ -11,7 +11,7 @@
   };
 
   inputs = {
-    #nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
@@ -48,7 +48,7 @@
   outputs = {
     self,
     nixpkgs,
-    #nixpkgs-unstable,
+    nixpkgs-unstable,
     nixos-hardware,
     home-manager,
     auto-cpufreq,
@@ -81,10 +81,6 @@
         system = "x86_64-linux";
 
         specialArgs = {
-          #pkgs-unstable = import nixpkgs-unstable {
-          #  inherit system;
-          #  config.allowUnfree = true;
-          #};
 	  inherit inputs outputs username;
         };
 
@@ -142,6 +138,10 @@
 
         specialArgs = {
           inherit inputs outputs;
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
         };
 
         modules = [

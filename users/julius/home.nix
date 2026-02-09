@@ -7,6 +7,8 @@
     ../../home/neovim
     ../../home/gtk
     ../../home/xdg
+    ../../home/sway.nix
+    ../../home/kanshi.nix
 
     ../../home/direnv
   ];

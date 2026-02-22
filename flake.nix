@@ -176,6 +176,10 @@
           home/neovim/default.nix
           home/zsh/default.nix
           home/cli.nix
+          home/gui.nix
+          home/java-dev.nix
+
+          home/direnv/default.nix
         ];
 
       };

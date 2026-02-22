@@ -18,7 +18,6 @@
 
   programs = {
     htop.enable = true;
-    git.enable = true;
     bat.enable = true;
   };
 }

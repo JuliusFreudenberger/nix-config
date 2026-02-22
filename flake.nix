@@ -60,8 +60,9 @@
   } @ inputs: let
     inherit (self) outputs;
     lib = nixpkgs.lib;
+    eachSystem = lib.genAttrs (import systems);
     forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
-    pkgsFor = lib.genAttrs (import systems) (
+    pkgsFor = eachSystem (
       system:
         import nixpkgs {
           inherit system;
@@ -179,6 +180,28 @@
 
       };
     };
+
+    devShells = eachSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        java11-maven = pkgs.mkShell { packages = with pkgs; [ maven jdk11 ]; };
+        java17-maven = pkgs.mkShell { packages = with pkgs; [ maven jdk17 ]; };
+        java21-maven = pkgs.mkShell { packages = with pkgs; [ maven jdk21 ]; };
+        texlive-with-pygments = pkgs.mkShell { packages = with pkgs; [ texliveFull python3Packages.pygments ]; };
+        php8 = pkgs.mkShell { packages = with pkgs; [
+          (php82.buildEnv {
+            extensions = ({ enabled, all }: enabled ++ (with all; [
+              xdebug
+            ]));
+            extraConfig = ''
+              xdebug.mode=debug
+            '';
+          })
+          php82Packages.composer
+        ];};
+      }
+    );
 
   };
 }

@@ -7,8 +7,6 @@
     typst
     typstyle
 
-    texliveFull
-
     pandoc
 
     zotero

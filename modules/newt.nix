@@ -44,16 +44,16 @@ in {
       };
     };
 
-    systemd.services."docker-pangolin" = {
+    systemd.services."docker-newt" = {
       after = [
-        "docker-network-pangolin.service"
+        "docker-network-newt.service"
       ];
       requires = [
-        "docker-network-pangolin.service"
+        "docker-network-newt.service"
       ];
     };
 
-    systemd.services."docker-network-pangolin" = {
+    systemd.services."docker-network-newt" = {
       path = [ pkgs.docker ];
       serviceConfig = {
         Type = "oneshot";

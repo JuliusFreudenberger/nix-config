@@ -1,5 +1,8 @@
 {
   pkgs-unstable,
+  utils,
+  config,
+  lib,
   ...
 }: {
 
@@ -25,6 +28,13 @@
       };
     };
   };
+
+  systemd.services.gerbil.serviceConfig.ExecStart = lib.mkForce (utils.escapeSystemdExecArgs [
+    (lib.getExe pkgs-unstable.fosrl-gerbil)
+    "--reachableAt=http://localhost:${toString config.services.gerbil.port}"
+    "--generateAndSaveKeyTo=${toString config.services.pangolin.dataDir}/config/key"
+    "--remoteConfig=http://localhost:3001/api/v1/gerbil/get-config"
+  ]);
 
 }
 

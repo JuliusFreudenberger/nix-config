@@ -10,7 +10,7 @@
       ../../modules/locale.nix
       ../../modules/server-cli.nix
       ../../modules/sshd.nix
-      ${inputs.secrets}/modules/opkssh.nix
+      "${inputs.secrets}/modules/opkssh.nix"
 
       ../../modules/intel-cpu.nix
       # Include the results of the hardware scan.

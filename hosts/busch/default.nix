@@ -3,10 +3,16 @@
 {
   imports =
     [
+      ./disko.nix
+
       ../../modules/nix.nix
+      ../../modules/auto-upgrade.nix
       ../../modules/locale.nix
       ../../modules/server-cli.nix
       ../../modules/sshd.nix
+      ${inputs.secrets}/modules/opkssh.nix
+
+      ../../modules/intel-cpu.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
@@ -14,11 +20,10 @@
   boot = {
     loader.grub = {
       enable = true;
-      device = "/dev/vda";
     };
     tmp.useTmpfs = true;
   };
-  networking.hostName = "nixos-server"; # Define your hostname.
+  networking.hostName = "busch"; # Define your hostname.
   users = {
     users = {
       julius = {
@@ -43,12 +48,18 @@
     ];
   };
 
-  services.proxmox-ve = {
-    enable = true;
-    ipAddress = "192.168.122.71";
+  services = {
+    proxmox-ve = {
+      enable = true;
+      ipAddress = "192.168.7.252";
 
-    # Make vmbr0 bridge visible in Proxmox web interface
-    bridges = [ "vmbr0" ];
+      # Make vmbr0 bridge visible in Proxmox web interface
+      bridges = [ "vmbr0" ];
+    };
+    openiscsi = {
+      enable = true;
+      name = "busch";
+    };
   };
 
   networking.useDHCP = false;
@@ -57,7 +68,7 @@
     enable = true;
 
     networks."10-lan" = {
-      matchConfig.Name = [ "enp1s0" ];
+      matchConfig.Name = [ "enp0s25" ];
       networkConfig = {
         Bridge = "vmbr0";
       };

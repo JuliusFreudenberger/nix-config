@@ -115,7 +115,7 @@
         ];
       };
 
-      server = nixpkgs.lib.nixosSystem rec {
+      busch = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
 
         specialArgs = {
@@ -123,7 +123,8 @@
         };
 
         modules = [
-          ./hosts/nixos-server-test
+          ./hosts/busch
+          disko.nixosModules.disko
           proxmox-nixos.nixosModules.proxmox-ve
 
           ({...}: {

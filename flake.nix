@@ -219,6 +219,10 @@
           })
           php82Packages.composer
         ];};
+        python-jupyter = pkgs.mkShell { packages = [ (pkgs.python3.withPackages (ps: with ps; [
+          ipykernel jupyterlab matplotlib numpy pandas
+        ])) ]; };
+        opentofu = pkgs.mkShell { packages = with pkgs; [ opentofu ]; };
       }
     );
 

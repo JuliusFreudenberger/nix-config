@@ -21,6 +21,7 @@
       ../../modules/newt.nix
       ../../modules/dockhand.nix
       ../../modules/auto-upgrade.nix
+      "${inputs.secrets}/modules/opkssh.nix"
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];

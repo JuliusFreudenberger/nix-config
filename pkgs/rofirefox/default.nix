@@ -37,6 +37,7 @@
     
     meta = with lib; {
       platforms = platforms.all;
+      mainProgram = "rofirefox";
     };
   }
 

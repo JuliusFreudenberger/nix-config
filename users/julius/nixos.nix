@@ -6,7 +6,7 @@
 }: {
   users.users.julius = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" "kvm" ];
     shell = pkgs.zsh;
   };
 

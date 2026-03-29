@@ -5,9 +5,7 @@
 }: {
   environment.systemPackages = with pkgs; [
     typst
-    typstfmt
-
-    texliveFull
+    typstyle
 
     pandoc
 

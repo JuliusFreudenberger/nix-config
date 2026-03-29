@@ -5,5 +5,6 @@
 }: {
   networking = {
     useDHCP = true;
+    firewall.allowPing = false;
   };
 }

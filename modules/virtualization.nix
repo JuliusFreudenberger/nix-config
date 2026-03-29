@@ -3,12 +3,16 @@
   lib,
   ...
 }: {
-  environment.systemPackages = with pkgs; [
-    virt-manager
-  ];
-
   virtualisation = {
-    libvirtd.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm.enable = true;
+        vhostUserPackages = [ pkgs.virtiofsd ];
+      };
+    };
     spiceUSBRedirection.enable = true;
   };
+
+  programs.virt-manager.enable = true;
 }

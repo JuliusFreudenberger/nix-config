@@ -8,6 +8,7 @@
     font-awesome
     terminus_font
     dlrg-fonts
+    fira
   ];
 
 }

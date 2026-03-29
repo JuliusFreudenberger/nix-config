@@ -4,12 +4,12 @@
   ...
 }: {
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  services.logind = {
-    lidSwitch = "suspend-then-hibernate";
-    lidSwitchDocked = "suspend-then-hibernate";
-    powerKey = "ignore";
+  services.logind.settings.Login = {
+    HandleLidSwitch= "suspend-then-hibernate";
+    HandleLidSwitchDocked = "suspend-then-hibernate";
+    HandlePowerKey = "ignore";
   };
 
   programs.auto-cpufreq.enable = true;

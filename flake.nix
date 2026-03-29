@@ -135,6 +135,20 @@
         ];
       };
 
+      busch-main-docker = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+
+        specialArgs = {
+          inherit inputs outputs;
+        };
+
+        modules = [
+          ./hosts/busch-main-docker
+          disko.nixosModules.disko
+          agenix.nixosModules.default
+        ];
+      };
+
       srv01-hf = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
 

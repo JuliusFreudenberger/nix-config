@@ -4,7 +4,7 @@
   ...
 }: {
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   services.logind.settings.Login = {
     HandleLidSwitch= "suspend-then-hibernate";

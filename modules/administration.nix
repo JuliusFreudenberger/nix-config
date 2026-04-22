@@ -7,6 +7,7 @@
     remmina
 
     teleport_17.client
+    opkssh
   ];
 
 }

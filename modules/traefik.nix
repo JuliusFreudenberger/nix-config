@@ -7,15 +7,7 @@
 let
 
   cfg = config.services.traefik-docker;
-
-  mapOidcClientNameToEnv = stringToReplace: lib.replaceString "-" "_" (lib.toUpper stringToReplace);
-
-  traefik-mtls-config = (pkgs.formats.yaml { }).generate "traefik-mtls-config" {
-    tls.options.default.clientAuth = {
-      caFiles = "caFiles/root_ca.crt";
-      clientAuthType = "VerifyClientCertIfGiven";
-    };
-  };
+  version = "3.6.14";
 
 in {
 
@@ -29,105 +21,40 @@ in {
       description = "Secrets for DNS providers.";
       type = lib.types.listOf lib.types.anything;
     };
-    mTLSCaCertSecret = lib.mkOption {
-      description = "Agenix secret containing the CA file to verify client certificates against.";
-    };
-    oidcAuthProviderUrl = lib.mkOption {
-      description = "Provider URL of OIDC auth provider.";
+    dnsChallengeProvider = lib.mkOption {
+      description = "Name of provider for DNS challenge.";
       type = lib.types.str;
-    };
-    oidcClients = lib.mkOption {
-      example = ''
-        immich = {
-          scopes = [
-            "openid"
-            "email"
-            "profile"
-          ];
-          enableBypassUsingClientCertificate = true;
-          usePkce = true;
-        };
-      '';
-      description = "Attribute set of OIDC clients with their configurations.";
-      type = lib.types.attrsOf (
-        lib.types.submodule {
-          options = {
-            secret = lib.mkOption {
-              description = ''Agenix secret containing the following needed environment variables in dotenv notation:
-                 - <clientName>_OIDC_AUTH_SECRET
-                 - <clientName>_OIDC_AUTH_PROVIDER_CLIENT_ID
-                 - <clientName>_OIDC_CLIENT_SECRET
-              '';
-            };
-            scopes = lib.mkOption {
-              default = [ "openid" ];
-              example = [ "openid" "email" "profile" "groups" ];
-              description = "OIDC scopes to request from auth provider.";
-              type = lib.types.listOf lib.types.str;
-            };
-            usePkce = lib.mkOption {
-              default = true;
-              description = "Whether to enable PKCE for this provider.";
-              type = lib.types.bool;
-            };
-            enableBypassUsingClientCertificate = lib.mkOption {
-              default = false;
-              description = "Whether to allow bypassing OIDC protection when a verified client certificate is presented.";
-              type = lib.types.bool;
-            };
-            useClaimsFromUserInfo = lib.mkOption {
-              default = false;
-              description = "When enabled, an additional request to the provider's userinfo_endpoint is made to validate the token and to retrieve additional claims. The userinfo claims are merged directly into the token claims, with userinfo values overriding token values for non-security-critical claims.";
-              type = lib.types.bool;
-            };
-            headers = lib.mkOption {
-              default = [];
-              description = "Headers to be added to the upstream request. Templating is possible. Documentation can be found here: https://traefik-oidc-auth.sevensolutions.cc/docs/getting-started/middleware-configuration";
-              type = lib.types.listOf (lib.types.submodule {
-                options = {
-                  Name = lib.mkOption {
-                    description = "The name of the header which should be added to the upstream request.";
-                    type = lib.types.str;
-                  };
-                  Value = lib.mkOption {
-                    description = "The value of the header, which can use Go-Templates.";
-                    type = lib.types.str;
-                  };
-                };
-              });
-            };
-          };
-        }
-      );
     };
   };
 
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers = {
       traefik = {
-        image = "traefik:v3.6.6";
+        image = "traefik:v${version}";
         cmd = [
           "--providers.docker=true"
+          "--providers.docker.endpoint=http://docker-socket-proxy:2375"
           "--providers.docker.exposedByDefault=false"
-          "--providers.docker.network=traefik"
+          "--providers.docker.network=webproxy"
           "--providers.file.directory=/dynamic-config"
           "--log.level=INFO"
           "--api=true"
           "--ping=true"
           "--entrypoints.web.address=:80"
           "--entrypoints.websecure.address=:443"
-          "--entrypoints.websecure.transport.respondingTimeouts.readTimeout=600s"
-          "--entrypoints.websecure.transport.respondingTimeouts.idleTimeout=600s"
-          "--entrypoints.websecure.transport.respondingTimeouts.writeTimeout=600s"
+          "--entrypoints.websecure.transport.respondingTimeouts.readTimeout=0"
+          "--entrypoints.websecure.transport.respondingTimeouts.idleTimeout=0"
+          "--entrypoints.websecure.transport.respondingTimeouts.writeTimeout=0"
+          "--serverstransport.forwardingtimeouts.responseheadertimeout=0s"
+          "--serverstransport.forwardingtimeouts.idleconntimeout=0s"
           "--entrypoints.web.http.redirections.entrypoint.to=websecure"
           "--entrypoints.websecure.asDefault=true"
-          "--entrypoints.websecure.http.middlewares=strip-mtls-headers@docker,pass-tls-client-cert@docker"
           "--entrypoints.websecure.http.tls.certresolver=letsencrypt"
+          "--certificatesresolvers.letsencrypt.acme.email=contact@jfreudenberger.de"
           "--certificatesresolvers.letsencrypt.acme.storage=/certs/acme.json"
           "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
-          "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=netcup"
-          "--experimental.plugins.traefik-oidc-auth.modulename=github.com/sevensolutions/traefik-oidc-auth"
-          "--experimental.plugins.traefik-oidc-auth.version=v0.17.0"
+          "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=${cfg.dnsChallengeProvider}"
+          "--providers.file.filename=/dynamic-config/providers.yaml"
         ];
         autoStart = true;
         ports = [
@@ -135,54 +62,17 @@ in {
           "443:443"
         ];
         networks = [
-          "traefik"
+          "webproxy"
+          "docker-socket"
         ];
-        environment = {
-          OIDC_AUTH_PROVIDER_URL = cfg.oidcAuthProviderUrl;
-        };
-        environmentFiles = lib.forEach cfg.dnsSecrets (secret: secret.path) ++ (lib.mapAttrsToList (oidcClientName: oidcClientConfig: oidcClientConfig.secret.path) cfg.oidcClients);
-        labels = {
-          "traefik.enable" = "true";
-          "traefik.http.routers.dashboard.rule" = "Host(`${cfg.dashboardUrl}`)";
-          "traefik.http.routers.dashboard.service" = "dashboard@internal";
-          "traefik.http.routers.dashboard.middlewares" = "traefik-dashboard-oidc-auth@file";
-          "traefik.http.routers.api.rule" = "Host(`${cfg.dashboardUrl}`) && (PathPrefix(`/api`) || PathPrefix(`/oidc/callback`))";
-          "traefik.http.routers.api.service" = "api@internal";
-          "traefik.http.routers.api.middlewares" = "traefik-dashboard-oidc-auth@file";
-          "traefik.http.middlewares.strip-mtls-headers.headers.customrequestheaders.X-Forwarded-Tls-Client-Cert" = "";
-          "traefik.http.middlewares.pass-tls-client-cert.passtlsclientcert.pem" = "true";
-        };
+        environmentFiles = lib.forEach cfg.dnsSecrets (secret: secret.path);
         volumes = let
-          oidc-config = lib.mapAttrs' (
-            oidcClientName: oidcClientConfig:
-            lib.nameValuePair "${oidcClientName}-oidc-auth" {
-              plugin.traefik-oidc-auth = {
-                LogLevel = "INFO";
-                Secret = ''{{ env "${mapOidcClientNameToEnv oidcClientName}_OIDC_AUTH_SECRET" }}'';
-                Provider = {
-                  Url = ''{{ env "OIDC_AUTH_PROVIDER_URL" }}'';
-                  ClientId = ''{{ env "${mapOidcClientNameToEnv oidcClientName}_OIDC_AUTH_PROVIDER_CLIENT_ID" }}'';
-                  ClientSecret = ''{{ env "${mapOidcClientNameToEnv oidcClientName}_OIDC_AUTH_PROVIDER_CLIENT_SECRET" }}'';
-                  UsePkce = oidcClientConfig.usePkce;
-                  UseClaimsFromUserInfo = oidcClientConfig.useClaimsFromUserInfo;
-                };
-                Scopes = oidcClientConfig.scopes;
-                LoginUrl = ''{{ env "OIDC_AUTH_PROVIDER_URL" }}'';
-              } // (lib.attrsets.optionalAttrs oidcClientConfig.enableBypassUsingClientCertificate {
-                BypassAuthenticationRule = "HeaderRegexp(`X-Forwarded-Tls-Client-Cert`, `.+`)";
-              }) // (lib.attrsets.optionalAttrs ((lib.length oidcClientConfig.headers) > 0) {
-                Headers = oidcClientConfig.headers;
-              });
-            }
-          ) cfg.oidcClients;
-          traefik-oidc-authentication-config = (pkgs.formats.yaml {}).generate "traefik-oidc-auth" {
-            http.middlewares = oidc-config;
+          traefik-providers-config = (pkgs.formats.yaml {}).generate "traefik-providers-config" {
+            tcp.serversTransports.pp-v2.proxyProtocol.version = 2;
           };
         in [
           "/var/run/docker.sock:/var/run/docker.sock"
-          "${traefik-oidc-authentication-config}:/dynamic-config/traefik-oidc-auth.yaml:ro"
-          "${traefik-mtls-config}:/dynamic-config/traefik-mtls.yaml:ro"
-          "${cfg.mTLSCaCertSecret.path}:/caFiles/root_ca.crt:ro"
+          "${traefik-providers-config}:/dynamic-config/providers.yaml:ro"
         ];
         extraOptions = [
           ''--mount=type=volume,source=certs,target=/certs,volume-driver=local''
@@ -194,24 +84,49 @@ in {
           "--health-start-period=5s"
         ];
       };
+      docker-socket-proxy = {
+        image = "tecnativa/docker-socket-proxy:v0.4.2";
+        autoStart = true;
+        networks = [
+          "docker-socket"
+        ];
+        environment = {
+          CONTAINERS = "1";
+        };
+        volumes = [
+          "/var/run/docker.sock:/var/run/docker.sock:ro"
+        ];
+      };
     };
 
     systemd.services."docker-traefik" = {
       after = [
-        "docker-network-traefik.service"
+        "docker-network-webproxy.service"
+        "docker-network-docker-socket.service"
       ];
       requires = [
-        "docker-network-traefik.service"
+        "docker-network-webproxy.service"
+        "docker-network-docker-socket.service"
       ];
     };
 
-    systemd.services."docker-network-traefik" = {
+    systemd.services."docker-network-webproxy" = {
       path = [ pkgs.docker ];
       serviceConfig = {
         Type = "oneshot";
       };
       script = ''
-        docker network inspect traefik || docker network create traefik --ipv4 --ipv6 --subnet=172.18.0.0/16 --gateway=172.18.0.1
+        docker network inspect webproxy || docker network create webproxy --ipv4 --ipv6 --subnet=172.18.0.0/16 --gateway=172.18.0.1
+      '';
+    };
+
+    systemd.services."docker-network-docker-socket" = {
+      path = [ pkgs.docker ];
+      serviceConfig = {
+        Type = "oneshot";
+      };
+      script = ''
+        docker network inspect docker-socket || docker network create docker-socket --ipv4 --ipv6 --subnet=172.19.0.0/16 --gateway=172.19.0.1
       '';
     };
 

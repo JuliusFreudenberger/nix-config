@@ -16,6 +16,7 @@
       ../../modules/docker.nix
       ../../modules/traefik.nix
       ../../modules/pocket-id.nix
+      ../../modules/netbird-docker.nix
       ../../modules/auto-upgrade.nix
       "${inputs.secrets}/modules/opkssh.nix"
       # Include the results of the hardware scan.
@@ -41,6 +42,24 @@
         TRUST_PROXY = true;
       };
       environmentFile = config.age.secrets.pocket-id.path;
+    };
+
+    netbird-docker = {
+      enable = true;
+      secrets = config.age.secrets.netbird-server;
+      proxy = {
+        domain = "netbird.jfreudenberger.de";
+        token-secret = config.age.secrets.netbird-proxy;
+      };
+    };
+    netbird.server = let
+      domain = "netbird.jfreudenberger.de";
+    in {
+      domain = domain;
+      management.domain = domain;
+      dashboard.domain = domain;
+      signal.domain = domain;
+      management.oidcConfigEndpoint = "https://login.jfreudenberger.de/.well-known/openid-configuration";
     };
   };
 

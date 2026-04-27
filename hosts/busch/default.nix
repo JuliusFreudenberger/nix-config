@@ -7,6 +7,7 @@
 
       ../../modules/nix.nix
       ../../modules/auto-upgrade.nix
+      ../../users/julius/nixos-server.nix
       ../../modules/locale.nix
       ../../modules/server-cli.nix
       ../../modules/sshd.nix
@@ -24,20 +25,6 @@
     tmp.useTmpfs = true;
   };
   networking.hostName = "busch"; # Define your hostname.
-  users = {
-    users = {
-      julius = {
-        isNormalUser = true;
-        uid = 1000;
-        extraGroups = [ "wheel" "julius" ];
-      };
-    };
-    groups = {
-      julius = {
-        gid = 1000;
-      };
-    };
-  };
 
   nix.settings = {
     substituters = [

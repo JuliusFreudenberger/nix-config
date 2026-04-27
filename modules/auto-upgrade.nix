@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }: {
   system.autoUpgrade = {
@@ -12,7 +13,7 @@
     flake = inputs.self.outPath;
     dates = "02:00";
     randomizedDelaySec = "45min";
-    allowReboot = true;
+    allowReboot = lib.mkDefault true;
     rebootWindow = {
       lower = "01:00";
       upper = "05:00";

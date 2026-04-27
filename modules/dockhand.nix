@@ -38,7 +38,7 @@ in {
         };
         extraOptions = [
           ''--mount=type=volume,source=dockhand-data,target=/app/data,volume-driver=local''
-          ''--group-add=${config.ids.gids.docker}''
+          ''--group-add=${toString config.ids.gids.docker}''
         ];
       };
     };

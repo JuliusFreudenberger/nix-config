@@ -80,6 +80,9 @@ in {
           "traefik.http.routers.netbird-dashboard.priority" = "1";
           "traefik.http.services.dashboard.loadbalancer.server.port" = "80";
         };
+        dependsOn = [
+          "netbird-server"
+        ];
       };
       netbird-server = {
         image = "netbirdio/netbird-server:${serverVersion}";
@@ -155,6 +158,9 @@ in {
           "traefik.http.services.netbird-server-h2c.loadbalancer.server.port" = "80";
           "traefik.http.services.netbird-server-h2c.loadbalancer.server.scheme" = "h2c";
         };
+        dependsOn = [
+          "traefik"
+        ];
       };
       netbird-proxy = {
         image = "netbirdio/reverse-proxy:${serverVersion}";

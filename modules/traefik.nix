@@ -76,6 +76,7 @@ in {
         ];
         extraOptions = [
           ''--mount=type=volume,source=certs,target=/certs,volume-driver=local''
+          "--ip=172.18.0.2"
           "--add-host=host.docker.internal:host-gateway"
           "--health-cmd=wget --spider --quiet http://localhost:8080/ping"
           "--health-interval=10s"
@@ -129,8 +130,6 @@ in {
         docker network inspect docker-socket || docker network create docker-socket --ipv4 --ipv6 --subnet=172.19.0.0/16 --gateway=172.19.0.1
       '';
     };
-
-    networking.firewall.extraCommands = "iptables -t nat -I PREROUTING -s 172.18.0.0/16 -d 172.18.0.0/16 -j MASQUERADE";
 
   };
 }

@@ -120,6 +120,9 @@
 
         specialArgs = {
           inherit inputs outputs;
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+          };
         };
 
         modules = [

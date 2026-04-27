@@ -24,6 +24,9 @@
     };
     tmp.useTmpfs = true;
   };
+
+  system.autoUpgrade.allowReboot = false;
+
   networking.hostName = "busch"; # Define your hostname.
 
   services.netbird = {

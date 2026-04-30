@@ -1,4 +1,4 @@
-{ inputs, outputs, config, lib, pkgs, ... }:
+{ inputs, outputs, config, lib, pkgs, pkgs-unstable, ... }:
 
 {
   imports =
@@ -17,6 +17,7 @@
       ../../modules/traefik.nix
       ../../modules/pocket-id.nix
       ../../modules/netbird-docker.nix
+      ../../modules/netbird-client.nix
       ../../modules/auto-upgrade.nix
       "${inputs.secrets}/modules/opkssh.nix"
       # Include the results of the hardware scan.
@@ -60,6 +61,13 @@
       dashboard.domain = domain;
       signal.domain = domain;
     };
+  };
+
+  services.netbird-client = {
+    enable = true;
+    managementUrl = "https://netbird.jfreudenberger.de";
+    host.setupKey = "B57B7B1D-AFBF-4D73-91F5-014A0D8645A4";
+    docker.setupKey = "F49C8243-DB76-4C8C-9136-25498D72B494";
   };
 
   systemd.network = {

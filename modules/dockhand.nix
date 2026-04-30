@@ -17,7 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers = {
       dockhand = {
-        image = "fnsys/dockhand:v1.0.12";
+        image = "fnsys/dockhand:v1.0.27";
         volumes = [
           "/var/run/docker.sock:/var/run/docker.sock"
         ];
@@ -26,16 +26,8 @@ in {
           PGID = "1000";
         };
         networks = [
-          "pangolin"
+          "webproxy"
         ];
-        labels = {
-          "pangolin.public-resources.dockhand.name" = "dockhand";
-          "pangolin.public-resources.dockhand.full-domain" = cfg.appUrl;
-          "pangolin.public-resources.dockhand.protocol" = "http";
-          "pangolin.public-resources.dockhand.auth.sso-enabled" = "true";
-          "pangolin.public-resources.dockhand.auth.auto-login-idp" = "1";
-          "pangolin.public-resources.dockhand.targets[0].method" = "http";
-        };
         extraOptions = [
           ''--mount=type=volume,source=dockhand-data,target=/app/data,volume-driver=local''
           ''--group-add=${toString config.ids.gids.docker}''

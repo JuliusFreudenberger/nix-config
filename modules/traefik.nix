@@ -35,7 +35,7 @@ in {
           "--providers.docker=true"
           "--providers.docker.endpoint=http://docker-socket-proxy:2375"
           "--providers.docker.exposedByDefault=false"
-          "--providers.docker.network=webproxy"
+          "--providers.docker.network=traefik"
           "--providers.file.directory=/dynamic-config"
           "--log.level=INFO"
           "--api=true"
@@ -62,7 +62,7 @@ in {
           "443:443"
         ];
         networks = [
-          "webproxy"
+          "traefik"
           "docker-socket"
         ];
         environmentFiles = lib.forEach cfg.dnsSecrets (secret: secret.path);
@@ -102,22 +102,22 @@ in {
 
     systemd.services."docker-traefik" = {
       after = [
-        "docker-network-webproxy.service"
+        "docker-network-traefik.service"
         "docker-network-docker-socket.service"
       ];
       requires = [
-        "docker-network-webproxy.service"
+        "docker-network-traefik.service"
         "docker-network-docker-socket.service"
       ];
     };
 
-    systemd.services."docker-network-webproxy" = {
+    systemd.services."docker-network-traefik" = {
       path = [ pkgs.docker ];
       serviceConfig = {
         Type = "oneshot";
       };
       script = ''
-        docker network inspect webproxy || docker network create webproxy --ipv4 --ipv6 --subnet=172.18.0.0/16 --gateway=172.18.0.1
+        docker network inspect traefik || docker network create traefik --ipv4 --ipv6 --subnet=172.18.0.0/16 --gateway=172.18.0.1
       '';
     };
 

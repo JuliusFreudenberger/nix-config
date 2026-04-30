@@ -54,7 +54,7 @@ in {
         image = "netbirdio/dashboard:v${dashboardVersion}";
         autoStart = true;
         networks = [
-          "webproxy"
+          "traefik"
         ];
         environment = {
           NETBIRD_MGMT_API_ENDPOINT = "https://${netbirdCfg.server.management.domain}";
@@ -88,7 +88,7 @@ in {
         image = "netbirdio/netbird-server:${serverVersion}";
         autoStart = true;
         networks = [
-          "webproxy"
+          "traefik"
         ];
         entrypoint = "/bin/sh";
         cmd = [
@@ -169,7 +169,7 @@ in {
           "51820:51820/udp"
         ];
         networks = [
-          "webproxy"
+          "traefik"
         ];
         dependsOn = [
           "netbird-server"

@@ -21,7 +21,7 @@ in {
         image = "ghcr.io/pocket-id/pocket-id:v${version}";
         autoStart = true;
         networks = [
-          "webproxy"
+          "traefik"
         ];
         environment = {
           APP_URL = pocketidCfg.settings.APP_URL;

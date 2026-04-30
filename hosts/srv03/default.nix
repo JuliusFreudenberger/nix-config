@@ -59,7 +59,6 @@
       management.domain = domain;
       dashboard.domain = domain;
       signal.domain = domain;
-      management.oidcConfigEndpoint = "https://login.jfreudenberger.de/.well-known/openid-configuration";
     };
   };
 

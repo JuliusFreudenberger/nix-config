@@ -18,6 +18,7 @@
       ../../modules/pocket-id.nix
       ../../modules/netbird-docker.nix
       ../../modules/netbird-client.nix
+      ../../modules/dockhand.nix
       ../../modules/auto-upgrade.nix
       "${inputs.secrets}/modules/opkssh.nix"
       # Include the results of the hardware scan.
@@ -43,6 +44,11 @@
         TRUST_PROXY = true;
       };
       environmentFile = config.age.secrets.pocket-id.path;
+    };
+
+    dockhand = {
+      enable = true;
+      appUrl = "dockhand.jfreudenberger.de";
     };
 
     netbird-docker = {

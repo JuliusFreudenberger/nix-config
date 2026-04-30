@@ -1,4 +1,4 @@
-{ inputs, outputs, config, lib, pkgs, ... }:
+{ inputs, outputs, config, lib, pkgs, pkgs-unstable, ... }:
 
 {
   imports =
@@ -12,6 +12,7 @@
       ../../modules/server-cli.nix
       ../../modules/sshd.nix
       ../../modules/docker.nix
+      ../../modules/netbird-client.nix
       "${inputs.secrets}/modules/opkssh.nix"
 
       # Include the results of the hardware scan.
@@ -25,6 +26,13 @@
     tmp.useTmpfs = true;
   };
   networking.hostName = "docker-main"; # Define your hostname.
+
+  services.netbird-client = {
+    enable = true;
+    managementUrl = "https://netbird.jfreudenberger.de";
+    host.setupKey = "DB64713B-FB23-49F1-A4A7-9B9E37B585D4";
+    docker.setupKey = "B9ECD884-B445-4156-8643-D0F34D64C200";
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

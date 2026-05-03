@@ -27,6 +27,7 @@ in {
           APP_URL = pocketidCfg.settings.APP_URL;
           TRUST_PROXY = lib.boolToString pocketidCfg.settings.TRUST_PROXY;
           ANALYTICS_DISABLED = lib.boolToString pocketidCfg.settings.ANALYTICS_DISABLED;
+          GEOLITE_DB_URL = "https://pkgs.netbird.io/geolocation-dbs/GeoLite2-City/download?suffix=tar.gz";
         };
         environmentFiles = [ pocketidCfg.environmentFile ];
         extraOptions = [

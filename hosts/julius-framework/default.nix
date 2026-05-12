@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, outputs, config, pkgs, ... }:
+{ inputs, outputs, config, pkgs, pkgs-unstable, ... }:
 
 {
   imports =
@@ -48,6 +48,25 @@
         outputs.overlays.additions
       ];
     };
+
+  services.resolved.enable = true;
+  services.netbird = {
+    package = pkgs-unstable.netbird;
+    useRoutingFeatures = "client";
+    clients.wt0 = {
+      hardened = true;
+      login.enable = false;
+      port = 51820;
+      ui.enable = true;
+      openFirewall = true;
+      openInternalFirewall = true;
+      autoStart = false;
+      environment = {
+        NB_MANAGEMENT_URL = "https://netbird.jfreudenberger.de:443";
+      };
+    };
+  };
+  users.users.julius.extraGroups = [ "netbird-wt0" ];
 
   hardware.enableRedistributableFirmware = true;
 

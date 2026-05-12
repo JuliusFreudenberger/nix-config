@@ -83,6 +83,9 @@
 
         specialArgs = {
 	  inherit inputs outputs username;
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+          };
         };
 
         modules = [

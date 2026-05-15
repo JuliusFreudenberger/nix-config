@@ -49,6 +49,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    services.netbird.useRoutingFeatures = lib.mkDefault "server";
     virtualisation.oci-containers.containers = {
       netbird-dashboard = {
         image = "netbirdio/dashboard:v${dashboardVersion}";

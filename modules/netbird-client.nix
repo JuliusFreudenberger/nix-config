@@ -57,6 +57,8 @@ in {
     };
     systemd.services.${config.services.netbird.clients.wt0.service.name}.path = [ pkgs.shadow ];
 
+    services.resolved.enable = true;
+
     virtualisation.oci-containers.containers = {
       netbird = {
         image = "netbirdio/netbird:${clientVersion}-rootless";

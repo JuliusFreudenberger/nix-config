@@ -4,6 +4,7 @@
   imports =
     [
       ../../modules/disko/legacy-full-ext4.nix
+      ./secrets.nix
 
       ../../users/julius/nixos-server.nix
       ../../modules/nix.nix
@@ -12,6 +13,7 @@
       ../../modules/server-cli.nix
       ../../modules/sshd.nix
       ../../modules/docker.nix
+      ../../modules/hawser.nix
       ../../modules/netbird-client.nix
       "${inputs.secrets}/modules/opkssh.nix"
 
@@ -32,6 +34,12 @@
     managementUrl = "https://netbird.jfreudenberger.de";
     host.setupKey = "DB64713B-FB23-49F1-A4A7-9B9E37B585D4";
     docker.setupKey = "B9ECD884-B445-4156-8643-D0F34D64C200";
+  };
+
+  services.hawser = {
+    enable = true;
+    dockhandServerUrl = "wss://dockhand-connect.jfreudenberger.de/api/hawser/connect";
+    tokenSecretFile = config.age.secrets.hawser-token;
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

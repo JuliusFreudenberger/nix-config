@@ -20,6 +20,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+
   # Use the GRUB 2 boot loader.
   boot = {
     loader.grub = {
@@ -33,7 +34,8 @@
     enable = true;
     managementUrl = "https://netbird.jfreudenberger.de";
     host.setupKey = "DB64713B-FB23-49F1-A4A7-9B9E37B585D4";
-    docker.setupKey = "B9ECD884-B445-4156-8643-D0F34D64C200";
+    docker.setupKey = "0028C8B8-BE57-4045-B16E-507B110AF24D";
+    dockerSubnet = "30";
   };
 
   services.hawser = {

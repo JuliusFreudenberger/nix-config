@@ -34,6 +34,14 @@ in {
               '';
             type = lib.types.anything;
           };
+          extraPorts = lib.mkOption {
+            description = ''
+              Extra ports to open for L4 routing.
+              Ports described in the config (https://docs.netbird.io/selfhosted/migration/enable-reverse-proxy#exposing-l4-ports) can be specified here.
+            '';
+            type = lib.types.listOf lib.types.str;
+            default = [ ];
+          };
         };
       };
     };
@@ -168,7 +176,7 @@ in {
         autoStart = true;
         ports = [
           "51820:51820/udp"
-        ];
+        ] ++ cfg.proxy.extraPorts;
         networks = [
           "traefik"
         ];

@@ -37,6 +37,11 @@ in {
       description = "Configuration for docker connection";
       type = clientConfiguration;
     };
+    dockerSubnet = lib.mkOption {
+      description = "Second part of ipv4 subnet";
+      type = lib.types.str;
+      default = "20";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -94,7 +99,7 @@ in {
         Type = "oneshot";
       };
       script = ''
-        docker network inspect webproxy || docker network create webproxy --ipv4 --ipv6 --subnet=172.20.0.0/16 --gateway=172.20.0.1
+        docker network inspect webproxy || docker network create webproxy --ipv4 --ipv6 --subnet=172.${cfg.dockerSubnet}.0.0/16 --gateway=172.${cfg.dockerSubnet}.0.1
       '';
     };
   };

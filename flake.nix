@@ -38,6 +38,10 @@
         darwin.follows = "";
       };
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     secrets = {
       url = "git+ssh://git@git.jfreudenberger.de/JuliusFreudenberger/nix-private.git";
       flake = false;
@@ -55,6 +59,7 @@
     proxmox-nixos,
     agenix,
     disko,
+    lanzaboote,
     systems,
     ...
   } @ inputs: let

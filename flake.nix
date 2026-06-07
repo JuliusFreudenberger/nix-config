@@ -163,6 +163,23 @@
         ];
       };
 
+      busch-gpu-docker = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+
+        specialArgs = {
+          inherit inputs outputs;
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+          };
+        };
+
+        modules = [
+          ./hosts/busch-gpu-docker
+          disko.nixosModules.disko
+          agenix.nixosModules.default
+        ];
+      };
+
       srv01-hf = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
 

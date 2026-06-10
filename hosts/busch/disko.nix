@@ -91,10 +91,6 @@
                       mountOptions = [ "compress=zstd" ];
                       mountpoint = "/var/lib/pve-cluster";
                     };
-                    "/swap" = {
-                      mountpoint = "/.swapvol";
-                      swap.swapfile.size = "32G";
-                    };
                   };
                 };
               };

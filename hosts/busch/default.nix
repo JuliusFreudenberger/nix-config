@@ -71,6 +71,11 @@
     };
   };
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
+
   networking.useDHCP = false;
 
   systemd.network = {

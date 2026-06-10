@@ -206,7 +206,7 @@ in {
     };
 
     systemd.services."docker-network-traefik" = {
-      path = [ pkgs.docker ];
+      path = [ pkgs.docker_29 ];
       serviceConfig = {
         Type = "oneshot";
       };

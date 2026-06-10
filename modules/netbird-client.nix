@@ -94,7 +94,7 @@ in {
 
 
     systemd.services."docker-network-webproxy" = {
-      path = [ pkgs.docker ];
+      path = [ pkgs.docker_29 ];
       serviceConfig = {
         Type = "oneshot";
       };

@@ -112,7 +112,7 @@ in {
     };
 
     systemd.services."docker-network-traefik" = {
-      path = [ pkgs.docker ];
+      path = [ pkgs.docker_29 ];
       serviceConfig = {
         Type = "oneshot";
       };
@@ -122,7 +122,7 @@ in {
     };
 
     systemd.services."docker-network-docker-socket" = {
-      path = [ pkgs.docker ];
+      path = [ pkgs.docker_29 ];
       serviceConfig = {
         Type = "oneshot";
       };

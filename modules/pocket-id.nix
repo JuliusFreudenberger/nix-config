@@ -7,7 +7,7 @@ let
 
   cfg = config.services.pocket-id-docker;
   pocketidCfg = config.services.pocket-id;
-  version = "2.6.2";
+  version = "2.8.0";
 
 in {
 

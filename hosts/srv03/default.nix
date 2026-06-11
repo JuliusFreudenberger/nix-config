@@ -16,6 +16,7 @@
       ../../modules/docker.nix
       ../../modules/traefik.nix
       ../../modules/pocket-id.nix
+      ../../modules/beszel-hub.nix
       ../../modules/netbird-docker.nix
       ../../modules/netbird-client.nix
       ../../modules/dockhand.nix
@@ -49,6 +50,11 @@
     dockhand = {
       enable = true;
       appUrl = "dockhand.jfreudenberger.de";
+    };
+
+    beszel-docker = {
+      enable = true;
+      appUrl = "https://beszel.jfreudenberger.de";
     };
 
     netbird-docker = {

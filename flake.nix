@@ -136,6 +136,7 @@
         modules = [
           ./hosts/busch
           disko.nixosModules.disko
+          agenix.nixosModules.default
           proxmox-nixos.nixosModules.proxmox-ve
 
           ({...}: {

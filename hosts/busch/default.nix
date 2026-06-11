@@ -4,6 +4,7 @@
   imports =
     [
       ./disko.nix
+      ./secrets.nix
 
       ../../modules/nix.nix
       ../../modules/auto-upgrade.nix
@@ -29,21 +30,31 @@
 
   networking.hostName = "busch"; # Define your hostname.
 
-  services.netbird = {
-    package = pkgs-unstable.netbird;
-    useRoutingFeatures = "both";
-    clients.wt0 = {
-      hardened = false;
-      login = {
-        enable = true;
-        setupKeyFile = (pkgs.writeText "setupKey" ''
-          A99F5508-D543-40B7-A31A-A8931B1AE246
-        '').outPath;
+  services = {
+    netbird = {
+      package = pkgs-unstable.netbird;
+      useRoutingFeatures = "both";
+      clients.wt0 = {
+        hardened = false;
+        login = {
+          enable = true;
+          setupKeyFile = (pkgs.writeText "setupKey" ''
+            A99F5508-D543-40B7-A31A-A8931B1AE246
+          '').outPath;
+        };
+        port = 51820;
+        environment = {
+          NB_MANAGEMENT_URL = "https://netbird.jfreudenberger.de";
+        };
       };
-      port = 51820;
+    };
+    beszel.agent = {
+      enable = true;
       environment = {
-        NB_MANAGEMENT_URL = "https://netbird.jfreudenberger.de";
+        HUB_URL = "https://beszel.jfreudenberger.de";
+        DISABLE_SSH = "true";
       };
+      environmentFile = config.age.secrets.beszel.path;
     };
   };
   systemd.services.${config.services.netbird.clients.wt0.service.name}.path = [ pkgs.shadow ];

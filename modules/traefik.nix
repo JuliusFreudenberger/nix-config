@@ -7,7 +7,7 @@
 let
 
   cfg = config.services.traefik-docker;
-  version = "3.6.14";
+  version = "3.7.5";
 
 in {
 

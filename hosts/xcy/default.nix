@@ -33,6 +33,15 @@
     tokenSecretFile = config.age.secrets.hawser-token;
   };
 
+  services.beszel.agent = {
+    enable = true;
+    environment = {
+      HUB_URL = "https://beszel.jfreudenberger.de";
+      DISABLE_SSH = "true";
+    };
+    environmentFile = config.age.secrets.beszel.path;
+  };
+
   networking.firewall = {
     checkReversePath = "loose";
     allowedTCPPorts = [

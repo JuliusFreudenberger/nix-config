@@ -44,6 +44,15 @@
     tokenSecretFile = config.age.secrets.hawser-token;
   };
 
+  services.beszel.agent = {
+    enable = true;
+    environment = {
+      HUB_URL = "https://beszel.jfreudenberger.de";
+      DISABLE_SSH = "true";
+    };
+    environmentFile = config.age.secrets.beszel.path;
+  };
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   # Most users should NEVER change this value after the initial install, for any reason,

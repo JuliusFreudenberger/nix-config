@@ -41,6 +41,7 @@
 	pinentry-gnome3
 	xdotool
 	playerctl
+        networkmanager_dmenu
       ];
     };
 

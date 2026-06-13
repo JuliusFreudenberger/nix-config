@@ -75,9 +75,12 @@
       loader = {
           efi.canTouchEfiVariables = true;
           systemd-boot = {
-	      enable = true;
-              editor = false;
+	      enable = false; # Enabled by lanzaboote
           };
+      };
+      lanzaboote = {
+        enable = true;
+        pkiBundle = "/var/lib/sbctl";
       };
       initrd = {
         systemd.enable = true;

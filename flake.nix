@@ -96,6 +96,7 @@
         modules = [
           nixos-hardware.nixosModules.framework-11th-gen-intel
           auto-cpufreq.nixosModules.default
+          lanzaboote.nixosModules.lanzaboote
           ./hosts/julius-framework
           ./users/julius/nixos.nix
 

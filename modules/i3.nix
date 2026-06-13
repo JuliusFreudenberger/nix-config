@@ -26,10 +26,10 @@
         dex # autostart applications
         xbindkeys # bind keys to commands
         xclip
-        xorg.xbacklight # control screen brightness
+        xbacklight # control screen brightness
 	brightnessctl
         numlockx
-        xorg.xdpyinfo # get screen information
+        xdpyinfo # get screen information
         sysstat # get system information
 
 	scrot

@@ -26,6 +26,8 @@
     history.size = 10000;
     history.path = "$HOME/.zsh_history";
 
+    dotDir = config.home.homeDirectory;
+
     initContent = lib.mkMerge [ beforeCompInit defaultInit ];
   };
 }

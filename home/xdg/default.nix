@@ -15,6 +15,9 @@
         "text/calendar" = ["thunderbird.desktop"];
       };
     };
-    userDirs.enable = true;
+    userDirs = {
+      enable = true;
+      setSessionVariables = false;
+    };
   };
 }

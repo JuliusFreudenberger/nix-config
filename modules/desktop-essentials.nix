@@ -15,10 +15,10 @@
     pavucontrol
 
     xed-editor
-    mate.mate-calc
+    mate-calc
 
     xarchiver
-    mate.engrampa
+    engrampa
     nemo-with-nextcloud-extensions
   ];
 

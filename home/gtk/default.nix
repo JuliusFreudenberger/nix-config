@@ -6,5 +6,6 @@
       name = "Arc";
       package = pkgs.arc-icon-theme;
     };
+    gtk4.theme = null;
   };
 }

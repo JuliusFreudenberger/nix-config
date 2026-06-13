@@ -7,6 +7,8 @@
     viAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;
+    withRuby = false;
+    withPython3 = false;
     coc.enable = true;
     plugins = with pkgs.vimPlugins; [
       vim-gitgutter

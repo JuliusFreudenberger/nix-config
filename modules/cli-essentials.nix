@@ -8,7 +8,7 @@
     wget
     curl
     git
-    neofetch
+    fastfetch
     bat
     tealdeer
 

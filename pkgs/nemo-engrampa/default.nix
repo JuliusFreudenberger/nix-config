@@ -8,7 +8,7 @@
   glib,
   gtk3,
   nemo,
-  mate,
+  engrampa,
   cinnamon-translations,
 }:
 
@@ -44,7 +44,7 @@ stdenv.mkDerivation rec {
     done
     popd
     substituteInPlace src/nemo-engrampa.c \
-      --replace-fail "file-roller" "${lib.getExe mate.engrampa}" \
+      --replace-fail "file-roller" "${lib.getExe engrampa}" \
       --replace-fail "fileroller" "engrampa" \
       --replace-fail "FileRoller" "Engrampa" \
       --replace-quiet "GNOMELOCALEDIR" "${cinnamon-translations}/share/locale"

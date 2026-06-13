@@ -87,6 +87,8 @@
     memoryPercent = 50;
   };
 
+  hardware.ksm.enable = true; # Linux kernel Same-Page Merging, useful when having multiple VMs with same OS
+
   networking.useDHCP = false;
 
   systemd.network = {

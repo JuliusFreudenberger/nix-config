@@ -28,7 +28,7 @@
     };
     tmp.useTmpfs = true;
   };
-  networking.hostName = "docker-main"; # Define your hostname.
+  networking.hostName = "busch-main-docker"; # Define your hostname.
 
   services.netbird-client = {
     enable = true;

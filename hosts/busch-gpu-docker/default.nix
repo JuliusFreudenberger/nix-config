@@ -40,7 +40,7 @@
   nixpkgs.config.nvidia.acceptLicense = true;
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  networking.hostName = "docker-gpu"; # Define your hostname.
+  networking.hostName = "busch-gpu-docker"; # Define your hostname.
 
   services.netbird-client = {
     enable = true;

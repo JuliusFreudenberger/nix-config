@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
   utils,
   config,
   lib,
@@ -46,7 +45,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     services.netbird = {
-      package = pkgs-unstable.netbird;
       useRoutingFeatures = "both";
       clients.wt0 = {
         hardened = false;

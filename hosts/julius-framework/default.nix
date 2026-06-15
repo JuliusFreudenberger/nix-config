@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, outputs, config, pkgs, pkgs-unstable, ... }:
+{ inputs, outputs, config, pkgs, ... }:
 
 {
   imports =
@@ -51,7 +51,6 @@
 
   services.resolved.enable = true;
   services.netbird = {
-    package = pkgs-unstable.netbird;
     useRoutingFeatures = "client";
     clients.wt0 = {
       hardened = true;

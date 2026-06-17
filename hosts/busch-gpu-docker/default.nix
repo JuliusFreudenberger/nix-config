@@ -8,6 +8,7 @@
 
       ../../users/julius/nixos-server.nix
       ../../modules/nix.nix
+      ../../modules/qemu-guest.nix
       ../../modules/auto-upgrade.nix
       ../../modules/locale.nix
       ../../modules/server-cli.nix

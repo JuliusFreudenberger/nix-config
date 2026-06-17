@@ -9,7 +9,7 @@ let
 
   cfg = config.services.netbird-client;
 
-  clientVersion = "0.71.2";
+  clientVersion = "0.72.4";
 
   clientConfiguration = lib.types.submodule {
     options = {

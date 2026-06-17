@@ -10,7 +10,7 @@ let
   cfg = config.services.netbird-docker;
   netbirdCfg = config.services.netbird;
 
-  serverVersion = "0.72.2";
+  serverVersion = "0.72.4";
   dashboardVersion = "2.39.0";
 
 in {

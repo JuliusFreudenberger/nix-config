@@ -15,7 +15,8 @@ let
     options = {
       setupKey = lib.mkOption {
         description = "Setup Key for this client";
-        type = lib.types.str;
+        type = lib.types.nullOr lib.types.str;
+        default = null;
       };
     };
   };
@@ -44,7 +45,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.netbird = {
+    services.netbird = lib.mkIf (cfg.host.setupKey != null) {
       useRoutingFeatures = "both";
       clients.wt0 = {
         hardened = false;
@@ -60,9 +61,9 @@ in {
     };
     systemd.services.${config.services.netbird.clients.wt0.service.name}.path = [ pkgs.shadow ];
 
-    services.resolved.enable = true;
+    services.resolved.enable = lib.mkIf (cfg.host.setupKey != null) true;
 
-    virtualisation.oci-containers.containers = {
+    virtualisation.oci-containers.containers = lib.mkIf (cfg.docker.setupKey != null) {
       netbird = {
         image = "netbirdio/netbird:${clientVersion}-rootless";
         autoStart = true;
@@ -81,7 +82,7 @@ in {
       };
     };
 
-    systemd.services."docker-netbird" = {
+    systemd.services."docker-netbird" = lib.mkIf (cfg.docker.setupKey != null) {
       after = [
         "docker-network-webproxy.service"
       ];
@@ -91,7 +92,7 @@ in {
     };
 
 
-    systemd.services."docker-network-webproxy" = {
+    systemd.services."docker-network-webproxy" = lib.mkIf (cfg.docker.setupKey != null) {
       path = [ pkgs.docker_29 ];
       serviceConfig = {
         Type = "oneshot";

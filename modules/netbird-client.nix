@@ -59,7 +59,6 @@ in {
         };
       };
     };
-    systemd.services.${config.services.netbird.clients.wt0.service.name}.path = [ pkgs.shadow ];
 
     services.resolved.enable = lib.mkIf (cfg.host.setupKey != null) true;
 

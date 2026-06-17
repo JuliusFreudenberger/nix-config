@@ -7,6 +7,7 @@
   environment.systemPackages = with pkgs; [
     wget
     curl
+    dig
     git
     fastfetch
     bat

@@ -46,11 +46,13 @@
 
   services.renovate = {
     enable = true;
+    schedule = "*:0/10";
     credentials = {
       RENOVATE_TOKEN = config.age.secrets.renovate-token.path;
       RENOVATE_GITHUB_COM_TOKEN = config.age.secrets.renovate-github-com-token.path;
     };
     settings = {
+      autodiscover = true;
       gitAuthor = "Renovate Bot <renovate@jfreudenberger.de>";
       platform = "forgejo";
       endpoint = "https://git.jfreudenberger.de";

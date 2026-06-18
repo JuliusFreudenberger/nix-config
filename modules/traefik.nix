@@ -7,7 +7,6 @@
 let
 
   cfg = config.services.traefik-docker;
-  version = "3.7.5";
 
 in {
 
@@ -30,7 +29,7 @@ in {
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers = {
       traefik = {
-        image = "traefik:v${version}";
+        image = "traefik:v3.7.5@sha256:d6858791f9e74df44ca4014166647c41cdc2abd3bf2a71b832ca4e1c6a91b257";
         cmd = [
           "--providers.docker=true"
           "--providers.docker.endpoint=http://docker-socket-proxy:2375"

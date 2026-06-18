@@ -6,7 +6,6 @@
 let
 
   cfg = config.services.beszel-docker;
-  version = "0.18.7";
 
 in {
 
@@ -21,7 +20,7 @@ in {
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers = {
       beszel = {
-        image = "henrygd/beszel:${version}";
+        image = "henrygd/beszel:0.18.7@sha256:a849ad80814b6a1a3be665304dcace5d4854b3bed7bde4dd1227e8ce1b82d477";
         autoStart = true;
         networks = [
           "traefik"

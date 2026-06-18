@@ -10,9 +10,6 @@ let
   cfg = config.services.netbird-docker;
   netbirdCfg = config.services.netbird;
 
-  serverVersion = "0.72.4";
-  dashboardVersion = "2.39.0";
-
 in {
 
   options.services.netbird-docker = {
@@ -60,7 +57,7 @@ in {
     services.netbird.useRoutingFeatures = lib.mkDefault "server";
     virtualisation.oci-containers.containers = {
       netbird-dashboard = {
-        image = "netbirdio/dashboard:v${dashboardVersion}";
+        image = "netbirdio/dashboard:v2.39.0";
         autoStart = true;
         networks = [
           "traefik"
@@ -94,7 +91,7 @@ in {
         ];
       };
       netbird-server = {
-        image = "netbirdio/netbird-server:${serverVersion}";
+        image = "netbirdio/netbird-server:0.72.4@sha256:9ab98a37002517204010ee88a0c7f5e76b1fe6e2a736043db60efb7a02fbded3";
         autoStart = true;
         networks = [
           "traefik"
@@ -172,7 +169,7 @@ in {
         ];
       };
       netbird-proxy = {
-        image = "netbirdio/reverse-proxy:${serverVersion}";
+        image = "netbirdio/reverse-proxy:0.72.4@sha256:3104d5ca3a76ac224d268b9cc1d2f983eaf6fefbbb1cc78c3dbecd07f9d2a7e0";
         autoStart = true;
         ports = [
           "51820:51820/udp"

@@ -9,8 +9,6 @@ let
 
   cfg = config.services.netbird-client;
 
-  clientVersion = "0.72.4";
-
   clientConfiguration = lib.types.submodule {
     options = {
       setupKey = lib.mkOption {
@@ -64,7 +62,7 @@ in {
 
     virtualisation.oci-containers.containers = lib.mkIf (cfg.docker.setupKey != null) {
       netbird = {
-        image = "netbirdio/netbird:${clientVersion}-rootless";
+        image = "netbirdio/netbird:0.72.4-rootless@sha256:d42136aabccb82c5237d2ee73febde237e13e850727bcb6bbf5b3c8717ece142";
         autoStart = true;
         hostname = "${config.networking.hostName}-docker";
         networks = [

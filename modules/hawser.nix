@@ -27,7 +27,7 @@ in {
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers = {
       hawser = {
-        image = "ghcr.io/finsys/hawser:0.2.42@sha256:79f926e8d8fe31c0dfe90858f90b69bfd4cfbb113472605620b91a4b444dd557";
+        image = "ghcr.io/finsys/hawser:0.2.45@sha256:ba4682fd350a4b16e1a1048817edf1054ee91f0556fef63805e447f6746fa157";
         volumes = [
           "/var/run/docker.sock:/var/run/docker.sock"
         ];

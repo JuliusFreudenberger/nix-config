@@ -91,7 +91,7 @@ in {
         ];
       };
       netbird-server = {
-        image = "netbirdio/netbird-server:0.72.4@sha256:9ab98a37002517204010ee88a0c7f5e76b1fe6e2a736043db60efb7a02fbded3";
+        image = "netbirdio/netbird-server:0.73.2@sha256:efa4e50dbc556ccd7bdc5b0d977ff29fe21bdee3b7e312cba6e3fa53bbeec60b";
         autoStart = true;
         networks = [
           "traefik"
@@ -169,7 +169,7 @@ in {
         ];
       };
       netbird-proxy = {
-        image = "netbirdio/reverse-proxy:0.72.4@sha256:3104d5ca3a76ac224d268b9cc1d2f983eaf6fefbbb1cc78c3dbecd07f9d2a7e0";
+        image = "netbirdio/reverse-proxy:0.73.2@sha256:358c475339c9f6ccf9bfdaa1d66c5cfeb251aa19a29271b851f0f309f939e09d";
         autoStart = true;
         ports = [
           "51820:51820/udp"

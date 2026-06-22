@@ -37,6 +37,7 @@
       ../../modules/optical-media.nix
       ../../modules/flatpak.nix
       ../../modules/gaming.nix
+      ../../modules/displaylink.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix

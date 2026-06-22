@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "prHourlyLimit": 0,
+  "nix": {
+    "enabled": true
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "docker",
+      "fileMatch": [
+        ".+\\.nix$"
+      ],
+      "matchStrings": [
+        "\\s+image\\s+=\\s+\"(?<depName>.*?):(?<currentValue>.*?)(@(?<digest>sha256:[a-z0-9]{64}))?\""
+      ]
+    }
+  ]
+}

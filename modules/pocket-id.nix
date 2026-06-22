@@ -7,7 +7,6 @@ let
 
   cfg = config.services.pocket-id-docker;
   pocketidCfg = config.services.pocket-id;
-  version = "2.8.0";
 
 in {
 
@@ -18,7 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers = {
       pocket-id = {
-        image = "ghcr.io/pocket-id/pocket-id:v${version}";
+        image = "ghcr.io/pocket-id/pocket-id:v2.8.0@sha256:a073640418b2cfc8587c488a7270580b3ab95cae2c543f5d64bbbe1fd7ccbae8";
         autoStart = true;
         networks = [
           "traefik"

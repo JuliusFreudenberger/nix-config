@@ -12,7 +12,7 @@
         ".+\\.nix$"
       ],
       "matchStrings": [
-        "\\s+image\\s+=\\s+\"(?<depName>.*?):(?<currentValue>.*?)(@(?<digest>sha256:[a-z0-9]{64}))?\""
+        "\\s+image\\s+=\\s+\"(?<depName>.*?):(?<currentValue>.*?)(@(?<currentDigest>sha256:[a-z0-9]{64}))?\""
       ]
     }
   ]

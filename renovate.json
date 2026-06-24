@@ -15,8 +15,8 @@
     {
       "customType": "regex",
       "datasourceTemplate": "docker",
-      "fileMatch": [
-        ".+\\.nix$"
+      "managerFilePatterns": [
+        "/.+\\.nix$/"
       ],
       "matchStrings": [
         "\\s+image\\s+=\\s+\"(?<depName>.*?):(?<currentValue>.*?)(@(?<currentDigest>sha256:[a-z0-9]{64}))?\""

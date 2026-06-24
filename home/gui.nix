@@ -7,7 +7,7 @@
   home.packages = with pkgs; [
     jetbrains.idea
     teams-for-linux
-    mate.engrampa
+    engrampa
     zotero
     deezer-enhanced
   ];

@@ -40,7 +40,7 @@ in {
       };
       output = {
         "*" = {
-          bg = "${pkgs.nixos-artwork.wallpapers.simple-dark-gray-bottom}/share/wallpapers/simple-dark-gray-2018-08-28/contents/images/nix-wallpaper-simple-dark-gray_bottom.png fill";
+          bg = "${pkgs.nixos-artwork.wallpapers.simple-dark-gray-bottom}/share/wallpapers/simple-dark-gray/contents/images/nix-wallpaper-simple-dark-gray_bottom.png fill";
         };
         eDP-1 = {
           scale = "1";

@@ -53,7 +53,7 @@ in {
       startup = [
         { command = (lib.getExe pkgs.dunst); }
         { command = (lib.getExe pkgs.networkmanagerapplet); }
-        { command = (lib.getExe pkgs.solaar); }
+        { command = "${lib.getExe pkgs.solaar} -w hide"; }
         { command = "${pkgs.ydotool}/bin/ydotoold"; }
       ];
       keybindings = lib.mkOptionDefault {

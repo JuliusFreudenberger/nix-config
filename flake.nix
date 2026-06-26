@@ -105,6 +105,12 @@
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
             }
+        {
+          virtualisation.vmVariant.virtualisation = {
+            memorySize = 8192;
+            cores = 3;
+          };
+        }
         ];
       };
 

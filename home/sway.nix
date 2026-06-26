@@ -20,6 +20,10 @@ in {
 
   wayland.windowManager.sway = {
     enable = true;
+    wrapperFeatures = {
+      base = true;
+      gtk = true;
+    };
     config = {
       modifier = modifier;
       terminal = lib.getExe pkgs.sakura;

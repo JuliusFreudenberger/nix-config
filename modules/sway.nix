@@ -1,7 +1,10 @@
 {
   pkgs,
+  lib,
   ...
 }: {
+  services.displayManager.defaultSession = lib.mkDefault "sway";
+
   programs.sway = {
     enable = true;
     wrapperFeatures = {

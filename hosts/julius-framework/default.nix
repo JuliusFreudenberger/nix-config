@@ -13,6 +13,7 @@
       ../../modules/network-client.nix
       ../../modules/locale.nix
       ../../modules/timezone-imperatively.nix
+      ../../modules/lightdm-gtk.nix
       ../../modules/boot-login.nix
       ../../modules/fonts.nix
       ../../modules/cli-essentials.nix

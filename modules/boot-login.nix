@@ -13,6 +13,7 @@
   };
 
   services = {
+    displayManager.defaultSession = "sway";
     xserver.displayManager = {
       lightdm = {
         enable = true;

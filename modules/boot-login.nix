@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   ...
 }: {
   boot = {
@@ -15,7 +16,8 @@
     xserver.displayManager = {
       lightdm = {
         enable = true;
-	greeters.gtk = {
+        greeters.gtk.enable = false;
+        greeters.gtk-custom = {
           enable = true;
           theme = {
             name = "Adwaita-dark";

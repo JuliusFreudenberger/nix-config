@@ -233,6 +233,7 @@ in {
     };
     extraConfig = ''
       assign [class = "^discord$"] 5
+      focus_wrapping yes
     '';
   };
 

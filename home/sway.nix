@@ -133,7 +133,7 @@ in {
       };
       assigns = {
         "6" = [{ app_id = "thunderbird"; }];
-        "5" = [{ app_id = "^Element$|^com.slack.Slack$"; }];
+        "5" = [{ app_id = "^element$|^com.slack.Slack$"; }];
       };
       floating.criteria = [
         { title = "MuseScore: Play Panel"; }

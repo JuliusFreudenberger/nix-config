@@ -16,10 +16,10 @@
     displayManager.defaultSession = "sway";
     xserver.displayManager = {
       lightdm = {
-        enable = true;
+        enable = false;
         greeters.gtk.enable = false;
         greeters.gtk-custom = {
-          enable = true;
+          enable = false;
           theme = {
             name = "Adwaita-dark";
           };
@@ -29,6 +29,24 @@
           };
         };
       };
+    };
+  };
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      skip_selection = true;
+    };
+  };
+
+  programs.regreet = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+    };
+    iconTheme = {
+      name = "Arc";
+      package = pkgs.arc-icon-theme;
     };
   };
 

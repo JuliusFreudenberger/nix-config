@@ -28,5 +28,6 @@
       xdg-desktop-portal-gtk
     ];
   };
+  security.pam.services.swaylock.rules.auth.unix.order = 11200;
 }
 

@@ -24,6 +24,7 @@ in {
       base = true;
       gtk = true;
     };
+    systemd.dbusImplementation = osConfig.services.dbus.implementation;
     config = {
       modifier = modifier;
       terminal = lib.getExe pkgs.sakura;

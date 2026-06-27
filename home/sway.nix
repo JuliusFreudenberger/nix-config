@@ -245,6 +245,8 @@ in {
   };
 
   services.swayidle = let
+      dimDuration = 15;
+      dimScreen = "${lib.getExe pkgs.chayang} -d ${toString dimDuration}";
       swaylock = "${lib.getExe pkgs.swaylock} -f";
       switchOutput = "${pkgs.sway}/bin/swaymsg 'output * power'";
     in {
@@ -255,8 +257,7 @@ in {
         after-resume = "${switchOutput} on";
       };
       timeouts = [
-        { timeout = 300; command = "${switchOutput} off"; }
-        { timeout = 330; command = swaylock; }
+        { timeout = 300; command = "${dimScreen} && ${switchOutput} off && ${swaylock}"; resumeCommand = "${switchOutput} on"; }
       ];
     };
 

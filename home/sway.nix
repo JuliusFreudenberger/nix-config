@@ -127,7 +127,7 @@ in {
           "e" = "exec ${pkgs.sway}/bin/swaymsg exit, mode default";
           "h" = "exec ${pkgs.systemd}/bin/systemctl hibernate, mode default";
           "r" = "exec ${pkgs.systemd}/bin/systemctl reboot, mode default";
-          "Shift+s" = "exec ${pkgs.systemd}/bin/systemctl shutdown, mode default";
+          "Shift+s" = "exec ${pkgs.systemd}/bin/systemctl poweroff, mode default";
           "Escape" = "mode default";
           "Return" = "mode default";
         };

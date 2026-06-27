@@ -29,7 +29,7 @@ in {
       modifier = modifier;
       terminal = lib.getExe pkgs.sakura;
       menu = "${lib.getExe pkgs.rofi} -show drun";
-      # rename workspaces
+      defaultWorkspace = "workspace number 1";
       fonts = {
         names = [ "FontAwesome5Free" "xft:URWGothic-Book" ];
         size = 11.0;

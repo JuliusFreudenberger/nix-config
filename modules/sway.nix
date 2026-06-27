@@ -18,8 +18,8 @@
       enable = true;
       settings = {
         screencast = {
-          chooser_type = "simple";
-          chooser_cmd = "${pkgs.slurp}/bin/slurp -f 'Select: %o' -or";
+          chooser_type = "dmenu";
+          chooser_cmd = "${lib.getExe pkgs.rofi} -dmenu -p 'Select a source to share:'";
         };
       };
     };

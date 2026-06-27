@@ -7,6 +7,7 @@
 }: let
   modifier = "Mod4";
   cfg = config.wayland.windowManager.sway;
+  background = "${pkgs.nixos-artwork.wallpapers.simple-dark-gray-bottom}/share/wallpapers/simple-dark-gray/contents/images/nix-wallpaper-simple-dark-gray_bottom.png";
 
   applications = "(D)iscord, Slac(k), (E)lement, (N)extcloud, (M)usic, (B)luetooth, (V)alent";
   exit = "(l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown";
@@ -43,7 +44,7 @@ in {
       };
       output = {
         "*" = {
-          bg = "${pkgs.nixos-artwork.wallpapers.simple-dark-gray-bottom}/share/wallpapers/simple-dark-gray/contents/images/nix-wallpaper-simple-dark-gray_bottom.png fill";
+          bg = "${background} fill";
         };
         eDP-1 = {
           scale = "1";
@@ -235,6 +236,29 @@ in {
       focus_wrapping yes
     '';
   };
+
+  programs.swaylock = {
+    enable = true;
+    settings = {
+      image = background;
+    };
+  };
+
+  services.swayidle = let
+      swaylock = "${lib.getExe pkgs.swaylock} -f";
+      switchOutput = "${pkgs.sway}/bin/swaymsg 'output * power'";
+    in {
+      enable = true;
+      events = {
+        before-sleep = swaylock;
+        lock = swaylock;
+        after-resume = "${switchOutput} on";
+      };
+      timeouts = [
+        { timeout = 300; command = "${switchOutput} off"; }
+        { timeout = 330; command = swaylock; }
+      ];
+    };
 
   services.wlsunset = {
     enable = true;

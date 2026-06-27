@@ -9,8 +9,7 @@
   cfg = config.wayland.windowManager.sway;
 
   applications = "(D)iscord, Slac(k), (E)lement, (N)extcloud, (M)usic, (B)luetooth, (V)alent";
-  i3exit = "(l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown";
-  i3exitProgram = "/home/julius/.config/i3/i3exit";
+  exit = "(l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown";
 in {
   home.packages = with pkgs; [
     wdisplays
@@ -92,7 +91,7 @@ in {
         "${modifier}+F3" = "exec nemo";
         "${modifier}+F4" = "exec ${lib.getExe pkgs.thunderbird}";
         "${modifier}+Shift+d" = ''mode "${applications}"'';
-        "${modifier}+Escape" = ''mode "${i3exit}"'';
+        "${modifier}+Escape" = ''mode "${exit}"'';
       };
       modes = {
         resize = {
@@ -119,15 +118,14 @@ in {
           "Escape" = "mode default";
           "Return" = "mode default";
         };
-        "${i3exit}" = {
-          "l" = "exec ${i3exitProgram} lock, mode default";
-          "Shift+l" = "exec ${i3exitProgram} slock, mode default";
-          "s" = "exec ${i3exitProgram} suspend, mode default";
-          "u" = "exec ${i3exitProgram} switch_user, mode default";
-          "e" = "exec ${i3exitProgram} logout, mode default";
-          "h" = "exec ${i3exitProgram} hibernate, mode default";
-          "r" = "exec ${i3exitProgram} reboot, mode default";
-          "Shift+s" = "exec ${i3exitProgram} shutdown, mode default";
+        "${exit}" = {
+          "l" = "exec ${pkgs.systemd}/bin/loginctl lock-session, mode default";
+          "s" = "exec ${pkgs.systemd}/bin/systemctl suspend, mode default";
+          "u" = "exec ${pkgs.lightdm}/bin/dm-tool lock, mode default";
+          "e" = "exec ${pkgs.sway}/bin/swaymsg exit, mode default";
+          "h" = "exec ${pkgs.systemd}/bin/systemctl hibernate, mode default";
+          "r" = "exec ${pkgs.systemd}/bin/systemctl reboot, mode default";
+          "Shift+s" = "exec ${pkgs.systemd}/bin/systemctl shutdown, mode default";
           "Escape" = "mode default";
           "Return" = "mode default";
         };

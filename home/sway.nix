@@ -138,12 +138,13 @@ in {
       };
       floating.criteria = [
         { title = "MuseScore: Play Panel"; }
-        { class = "pavucontrol"; }
-        { class = "System-config-printer.py";}
-        { class = "Mate-calc"; }
-        { class = "Blueman-manager"; }
-        { class = "Nm-connection-editor"; }
-        { class = "Zotero"; window_role = "Toplevel"; }
+        { app_id = "org.pulseaudio.pavucontrol"; }
+        { app_id = "system-config-printer";}
+        { app_id = "mate-calc"; }
+        { app_id = ".blueman-manager-wrapped"; }
+        { app_id = "nm-connection-editor"; }
+        { app_id = "Zotero"; window_role = "Toplevel"; }
+        { app_id = "com.nextcloud.desktopclient.nextcloud"; }
       ];
       colors = {
         background = "#2B2C2B";

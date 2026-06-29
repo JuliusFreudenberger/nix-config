@@ -17,7 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers = {
       dockhand = {
-        image = "fnsys/dockhand:v1.0.35@sha256:1b9473bd11cb60fed23bad8d335acb03f032b369230cd0a3dc3c0a1cbb8cb47c";
+        image = "fnsys/dockhand:v1.0.36@sha256:ca0aa45aa61f35b521e05a7bbf79dcd571660e2a516dec49cca6fe374251abcc";
         volumes = [
           "/var/run/docker.sock:/var/run/docker.sock"
         ];

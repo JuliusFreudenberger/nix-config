@@ -92,6 +92,7 @@ in {
         "${modifier}+Shift+F2" = "exec ${lib.getExe pkgs.firefox} --private-window";
         "${modifier}+F3" = "exec nemo";
         "${modifier}+F4" = "exec ${lib.getExe pkgs.thunderbird}";
+        "${modifier}+Ctrl+w" = "exec ${lib.getExe pkgs.networkmanager_dmenu}";
         "${modifier}+Shift+d" = ''mode "${applications}"'';
         "${modifier}+Escape" = ''mode "${exit}"'';
       };

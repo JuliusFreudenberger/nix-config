@@ -9,8 +9,8 @@ with lib;
 
 let
 
-  dmcfg = config.services.xserver.displayManager;
-  ldmcfg = dmcfg.lightdm;
+  dmcfg = config.services.displayManager;
+  ldmcfg = xcfg.displayManager.lightdm;
   xcfg = config.services.xserver;
   cfg = ldmcfg.greeters.gtk-custom;
 

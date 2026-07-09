@@ -11,6 +11,9 @@
 
   applications = "(D)iscord, Slac(k), (E)lement, (N)extcloud, (M)usic, (B)luetooth, (V)alent";
   exit = "(l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown";
+
+  sinkToggle = "${pkgs.alsa-utils}/bin/amixer -q set Master toggle";
+  sourceToggle = "${pkgs.alsa-utils}/bin/amixer -q set Capture toggle";
 in {
   home.packages = with pkgs; [
     wdisplays
@@ -78,9 +81,9 @@ in {
         "XF86MonBrightnessDown" = "exec ${lib.getExe pkgs.brightnessctl} s 10%-";
         "XF86AudioRaiseVolume" = "exec ${pkgs.alsa-utils}/bin/amixer -q set Master 5%+ unmute";
         "XF86AudioLowerVolume" = "exec ${pkgs.alsa-utils}/bin/amixer -q set Master 5%- unmute";
-        "XF86AudioMute" = "exec ${pkgs.alsa-utils}/bin/amixer -q set Master toggle";
-        "XF86AudioMicMute" = "exec ${pkgs.alsa-utils}/bin/amixer -q set Capture toggle";
-        "${modifier}+c" = "exec ${pkgs.alsa-utils}/bin/amixer -q set Capture toggle";
+        "XF86AudioMute" = "exec ${sinkToggle}";
+        "XF86AudioMicMute" = "exec ${sourceToggle}";
+        "${modifier}+c" = "exec ${sourceToggle}";
         "XF86AudioPlay" = "exec ${lib.getExe pkgs.playerctl} play-pause";
         "${modifier}+ctrl+space" = "exec ${lib.getExe pkgs.playerctl} play-pause";
         "${modifier}+z" = "exec ${lib.getExe pkgs.playerctl} volume 5-";
@@ -185,53 +188,7 @@ in {
           indicator = "#000000";
         };
       };
-      bars = [
-        {
-          mode = "dock";
-          hiddenState = "hide";
-          position = "bottom";
-          workspaceButtons = true;
-          workspaceNumbers = true;
-          statusCommand = "${lib.getExe pkgs.i3blocks} -c ~/.config/i3/i3blocks.conf";
-          fonts = {
-            names = [ "xft:URWGothic-Book" ];
-            size = 11.0;
-          };
-          extraConfig = ''
-            icon_theme Arc
-          '';
-          colors = {
-            background = "#222D31";
-            statusline = "#F9FAF9";
-            separator = "#454947";
-            focusedWorkspace = {
-              border = "#F9FAF9";
-              background = "#16a085";
-              text = "#292F34";
-            };
-            activeWorkspace = {
-              border = "#595B5B";
-              background = "#353836";
-              text = "#FDF6E3";
-            };
-            inactiveWorkspace = {
-              border = "#595B5B";
-              background = "#222D31";
-              text = "#EEE8D5";
-            };
-            urgentWorkspace = {
-              border = "#16a085";
-              background = "#FDF6E3";
-              text = "#E5201D";
-            };
-            bindingMode = {
-              border = "#16a085";
-              background = "#2C2C2C";
-              text = "#F9FAF9";
-            };
-          };
-        }
-      ];
+      bars = [];
     };
     extraConfig = ''
       assign [class = "^discord$"] 5
@@ -244,6 +201,194 @@ in {
     settings = {
       image = background;
     };
+  };
+
+  programs.waybar = {
+    enable = true;
+    systemd.enable = true;
+    settings = {
+      mainBar = {
+        layer = "top";
+        position = "bottom";
+        height = 30;
+        output = [ "*" ];
+        modules-left = [
+          "sway/workspaces"
+          "sway/mode"
+        ];
+        modules-right = [
+          "pulseaudio#sink"
+          "pulseaudio#source"
+          "network"
+          "memory"
+          "cpu"
+          "backlight"
+          "battery"
+          "mpris"
+          "clock"
+          "tray"
+        ];
+        "tray" = {
+          "spacing" = 10;
+        };
+        "pulseaudio#sink" = {
+          "format" = " {volume}%";
+          "format-muted" = " MUTE";
+          "scroll-step" = 5;
+          "on-right-click" = sinkToggle;
+        };
+        "pulseaudio#source" = {
+          "format" = "{format_source}";
+          "format-source" = " {volume}%";
+          "format-source-muted" = " MUTE";
+          "tooltip-format" = "{source_desc}";
+          "scroll-step" = 5;
+          "target" = "source";
+          "on-right-click" = sourceToggle;
+        };
+        "network" = {
+          "interface" = "wl*";
+          "format" = " {signalStrength}% {essid}";
+          "format-disconnected" = "";
+        };
+        "memory" = {
+          "format" = " {used:0.1f}G/{total:0.1f}G ({percentage}%)";
+        };
+        "cpu" = {
+          "format" = " {usage}%";
+        };
+        "mpris" = {
+          "format" = "{status_icon} {dynamic}";
+          "ignored-players" = "firefox";
+          "status-icons" = {
+            "playing" = "";
+            "paused" = "";
+            "stopped" = "";
+          };
+        };
+        "clock" = {
+          "interval" = 1;
+          "format" = " {:%d.%m.%Y %H:%M:%S}";
+          "tooltip-format" = "<tt><small>{calendar}</small></tt>";
+        };
+        "battery" = {
+          "format" = "⚡ {icon} {capacity}% ({time})";
+          "format-plugged" = "";
+          "format-icons" = {
+            "default" = ["DIS"];
+            "charging" = ["CHR"];
+          };
+          "format-time" = "{H:02d}:{M:02d}";
+        };
+        "backlight" = {
+          "format" = "{icon} {percent}%";
+          "format-icons" = [" "];
+          "scroll-step" = 5;
+        };
+      };
+    };
+    style = ''
+    * {
+        font-family: "UbuntuMono Nerd Font";
+        font-size: 14px;
+    }
+
+    window#waybar {
+        background-color: #222d31;
+        color: #f9faf9;
+    }
+
+    .modules-left {
+        background-color: #222d31;
+        padding: 0px 0px 0px 0px;
+    }
+
+    .modules-right {
+        background-color: #222d31;
+        padding: 0px 5px 0px 0px;
+    }
+
+    #custom-scratch {
+        background-color: #222d31;
+        color: #b8b8b8;
+        padding: 0px 9px 0px 9px;
+    }
+
+    #workspaces button {
+        padding: 0px 8px 0px 8px;
+        min-width: 1px;
+        color: #fdf6e3;
+        background-color: #353836;
+        border-radius: 0;
+        border-color: #595b5b;
+    }
+
+    #workspaces button.focused {
+        background-color: #16a085;
+        color: #292f34;
+        border-color: #fdf6e3;
+    }
+
+    #mode {
+        background-color: #2c2c2c;
+        color: #f9faf9;
+        padding: 0px 5px 0px 5px;
+        border: 1px solid #16a085;
+    }
+
+    #window {
+        color: #ffffff;
+        background-color: #285577;
+        padding: 0px 10px 0px 10px;
+    }
+
+    window#waybar.empty #window {
+        background-color: transparent;
+        color: transparent;
+    }
+
+    window#waybar.empty {
+        background-color: #323232;
+    }
+
+    #network,
+    #temperature,
+    #backlight,
+    #pulseaudio,
+    #battery,
+    #cpu,
+    #memory {
+        padding: 0px 10px 0px 10px;
+    }
+
+    #clock {
+        margin: 0px 10px 0px 10px;
+    }
+
+    #tray {
+        padding: 0px 0px 0px 0px;
+        margin: 0px 0px 0px 0px;
+    }
+
+    #battery.critical {
+        color: #ff5555;
+    }
+
+    #cpu.high {
+        color: #fffc00;
+    }
+
+    #cpu.intensive {
+        color: #ff0000;
+    }
+
+    #pulseaudio.sink.muted {
+        color: #ff0000;
+    }
+    #pulseaudio.source.source-muted {
+        color: #ff0000;
+    }
+'';
   };
 
   services.swayidle = let

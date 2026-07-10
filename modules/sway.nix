@@ -29,5 +29,10 @@
     ];
   };
   security.pam.services.swaylock.rules.auth.unix.order = 11200;
+
+  services = {
+    gvfs.enable = true;
+    udisks2.enable = true;
+  };
 }
 

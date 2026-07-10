@@ -3,6 +3,7 @@
 }: let
   t27 = "Lenovo Group Limited T27h-30*";
   m15 = "Lenovo Group Limited M15*";
+  dell = "Dell Inc.*";
 in {
   services.kanshi = {
     enable = true;
@@ -25,6 +26,12 @@ in {
         profile.outputs = [
           { criteria = "eDP-1"; position = "0,1080"; }
           { criteria = m15; position = "168,0"; }
+        ];
+      }
+      { profile.name = "dell" ;
+        profile.outputs = [
+          { criteria = "eDP-1"; position = "0,1080"; }
+          { criteria = dell; position = "168,0"; }
         ];
       }
     ];

@@ -75,7 +75,7 @@ in {
         "${modifier}+Ctrl+8" = "move container to workspace number 8; workspace number 8";
         "${modifier}+Ctrl+9" = "move container to workspace number 9; workspace number 9";
         "${modifier}+Ctrl+0" = "move container to workspace number 10; workspace number 10";
-        "${modifier}+Shift+p" = "exec rofi-rbw --action copy";
+        "${modifier}+Shift+p" = "exec ${lib.getExe pkgs.rofi-rbw-wayland} --action copy";
         "XF86MonBrightnessUp" = "exec ${lib.getExe pkgs.brightnessctl} s +10%";
         "${modifier}+Tab" = "exec ${lib.getExe pkgs.rofi} -show window";
         "XF86MonBrightnessDown" = "exec ${lib.getExe pkgs.brightnessctl} s 10%-";

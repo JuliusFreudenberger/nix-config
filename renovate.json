@@ -6,6 +6,10 @@
     {
       "matchPackageNames": ["/netbirdio/"],
       "groupName": "netbird"
+    },
+    {
+      "matchSourceUrls": "git+ssh://git@git.jfreudenberger.de/JuliusFreudenberger/nix-private.git",
+      "enabled": false
     }
   ],
   "nix": {

@@ -329,6 +329,12 @@ in {
         border-color: #fdf6e3;
     }
 
+    #workspaces button.urgent {
+        background-color: #FDF6E3;
+        color: #E5201D;
+        border-color: #16a085;
+    }
+
     #mode {
         background-color: #2c2c2c;
         color: #f9faf9;

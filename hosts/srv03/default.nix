@@ -31,7 +31,7 @@
   services = {
     traefik-docker = {
       enable = true;
-      dashboardUrl = "traefik.netbird.jfreudenberger.de";
+      dashboardUrl = "traefik.srv03.jfreudenberger.de";
       dnsChallengeProvider = "inwx";
       dnsSecrets = [
         config.age.secrets.inwx

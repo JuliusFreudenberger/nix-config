@@ -64,6 +64,13 @@ in {
           "traefik"
           "docker-socket"
         ];
+        labels = {
+          "traefik.enable" = "true";
+          "traefik.http.routers.dashboard.rule" = "Host(`${cfg.dashboardUrl}`)";
+          "traefik.http.routers.dashboard.entrypoints" = "websecure";
+          "traefik.http.routers.dashboard.service" = "api@internal";
+          "traefik.http.routers.dashboard.middlewares" = "auth@file";
+        };
         environmentFiles = lib.forEach cfg.dnsSecrets (secret: secret.path);
         volumes = let
           traefik-providers-config = (pkgs.formats.yaml {}).generate "traefik-providers-config" {
@@ -72,6 +79,7 @@ in {
         in [
           "/var/run/docker.sock:/var/run/docker.sock"
           "${traefik-providers-config}:/dynamic-config/providers.yaml:ro"
+          "/run/traefik/basicAuth.yaml:/dynamic-config/basicAuth.yaml:ro"
         ];
         extraOptions = [
           ''--mount=type=volume,source=certs,target=/certs,volume-driver=local''
@@ -108,6 +116,30 @@ in {
         "docker-network-traefik.service"
         "docker-network-docker-socket.service"
       ];
+    };
+
+    systemd.services.generate-traefik-config = {
+      description = "Generate Traefik basic auth config";
+      wantedBy = [ "multi-user.target" ];
+      before = [ "docker-traefik.service" ];
+
+      serviceConfig.Type = "oneshot";
+
+      script = ''
+        set -eu
+        mkdir -p /run/traefik
+
+        BASIC_AUTH="$(cat ${config.age.secrets.traefik-basic-auth.path})"
+
+        cat > /run/traefik/basicAuth.yaml <<EOF
+http:
+  middlewares:
+    auth:
+      basicAuth:
+        users:
+          - "$BASIC_AUTH"
+EOF
+      '';
     };
 
     systemd.services."docker-network-traefik" = {

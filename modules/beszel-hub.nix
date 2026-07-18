@@ -27,6 +27,7 @@ in {
         ];
         environment = {
           APP_URL = cfg.appUrl;
+          DISABLE_PASSWORD_AUTH = "true";
         };
         extraOptions = [
           ''--mount=type=volume,source=data,target=/beszel_data,volume-driver=local''

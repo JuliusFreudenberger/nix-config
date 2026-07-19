@@ -21,6 +21,7 @@ module "truenas" {
   target_node   = "busch"
   vmid          = 100
   memory        = 8192
+  balloon       = 8192
   cpu_cores     = 2
   disk_storage  = "local"
   disk_size     = "32G"

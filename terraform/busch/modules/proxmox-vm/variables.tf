@@ -21,8 +21,14 @@ variable "target_node" {
 }
 
 variable "memory" {
-  description = "Memory to allocate for the VM"
+  description = "Memory to allocate for the VM in Megabytes"
   type        = string
+}
+
+variable "balloon" {
+  description = "The minimum amount of memory to allocate to the VM in Megabytes"
+  type        = number
+  default     = 1024
 }
 
 variable "cpu_cores" {

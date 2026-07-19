@@ -14,7 +14,7 @@ resource "proxmox_vm_qemu" "truenas" {
   vmid               = var.vmid
   machine            = length(var.mapped_pcie_devices) == 0 ? "pc" : "q35"
   memory             = var.memory
-  balloon            = 1024
+  balloon            = var.balloon
   scsihw             = "virtio-scsi-pci"
   boot               = "order=scsi0;ide0"
   start_at_node_boot = true

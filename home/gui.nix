@@ -10,6 +10,8 @@
     engrampa
     zotero
     deezer-enhanced
+    vlc
+    libreoffice-fresh
   ];
 
   programs = {

@@ -15,7 +15,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "github:JuliusFreudenberger/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     auto-cpufreq = {
@@ -42,6 +42,10 @@
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    gram-extensions = {
+      url = "https://codeberg.org/niklaskorz/nix-gram-extensions/archive/main.tar.gz";
+      # inputs.nixpkgs.follows = "nixpkgs"; Not possible until https://github.com/NixOS/nixpkgs/pull/537433 reaches input nixpkgs
+    };
     secrets = {
       url = "git+ssh://git@git.jfreudenberger.de/JuliusFreudenberger/nix-private.git";
       flake = false;
@@ -60,6 +64,7 @@
     agenix,
     disko,
     lanzaboote,
+    gram-extensions,
     systems,
     ...
   } @ inputs: let
@@ -87,7 +92,13 @@
         system = "x86_64-linux";
 
         specialArgs = {
-	  inherit inputs outputs username;
+          inherit inputs outputs username;
+
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+          };
+
+          gram-extensions = gram-extensions.packages.${system};
         };
 
         modules = [

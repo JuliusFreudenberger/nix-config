@@ -11,6 +11,8 @@
     ../../home/kanshi.nix
 
     ../../home/direnv
+
+    ../../home/gram.nix
   ];
 
 }

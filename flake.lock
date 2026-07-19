@@ -169,6 +169,22 @@
         "type": "github"
       }
     },
+    "gram-extensions": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1784322176,
+        "narHash": "sha256-GbwlyCMD+nWBr2UPw1MLvqzPePX5jPIzW1D20zfNFCE=",
+        "rev": "294fb728adcc51987f6c63f8f2d27f602c46f915",
+        "type": "tarball",
+        "url": "https://codeberg.org/api/v1/repos/niklaskorz/nix-gram-extensions/archive/294fb728adcc51987f6c63f8f2d27f602c46f915.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://codeberg.org/niklaskorz/nix-gram-extensions/archive/main.tar.gz"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -197,15 +213,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1783740085,
-        "narHash": "sha256-qajyHfZY29G2oEQk+uHxmsJcRoBUBXP9maTpFlwP/dI=",
-        "owner": "nix-community",
+        "lastModified": 1784409593,
+        "narHash": "sha256-PZ+Xc0Q2MRdR0Dsorwgc7Zi2ST++a8mOTvwewrn2hXw=",
+        "owner": "JuliusFreudenberger",
         "repo": "home-manager",
-        "rev": "3cd22efe6471dc7365c822bd9ad73a21e55f38fb",
+        "rev": "8cc72ea0c4253217b3233db54c65e72848a5eaee",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "JuliusFreudenberger",
         "ref": "release-26.05",
         "repo": "home-manager",
         "type": "github"
@@ -258,7 +274,7 @@
     },
     "nixos-hardware": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1784100666,
@@ -277,15 +293,18 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1767892417,
-        "narHash": "sha256-8bW3q88CEg2u4hSP66Vf4lpbLonHz7hqDNBMcCY7E9U=",
-        "rev": "3497aa5c9457a9d88d71fa93a4a8368816fbeeba",
-        "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre924538.3497aa5c9457/nixexprs.tar.xz"
+        "lastModified": 1783503551,
+        "narHash": "sha256-bKMNrMZd/B56gE31iFABBHTbkzAptLy7G8G235yOv8Q=",
+        "owner": "niklaskorz",
+        "repo": "nixpkgs",
+        "rev": "6da901a408ae91ee140bc8e94081d758f0a73126",
+        "type": "github"
       },
       "original": {
-        "type": "tarball",
-        "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
+        "owner": "niklaskorz",
+        "ref": "wasip2-rustc",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "nixpkgs-libvncserver": {
@@ -353,6 +372,19 @@
       }
     },
     "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1767892417,
+        "narHash": "sha256-8bW3q88CEg2u4hSP66Vf4lpbLonHz7hqDNBMcCY7E9U=",
+        "rev": "3497aa5c9457a9d88d71fa93a4a8368816fbeeba",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre924538.3497aa5c9457/nixexprs.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
+      }
+    },
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1784160687,
         "narHash": "sha256-iYL/bixrb6FlHFu/gIuBYzq6c6lM5AAXsXNSWXtIgQc=",
@@ -441,11 +473,12 @@
         "agenix": "agenix",
         "auto-cpufreq": "auto-cpufreq",
         "disko": "disko",
+        "gram-extensions": "gram-extensions",
         "home-manager": "home-manager_2",
         "lanzaboote": "lanzaboote",
         "lazy-apps": "lazy-apps",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "proxmox-nixos": "proxmox-nixos",
         "secrets": "secrets",

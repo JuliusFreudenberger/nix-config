@@ -16,10 +16,6 @@
       ../../modules/qemu-guest.nix
       ../../modules/docker.nix
       ../../modules/teleport.nix
-      ../../modules/portainer_agent.nix
-      ../../modules/pangolin.nix
-      ../../modules/newt.nix
-      ../../modules/dockhand.nix
       ../../modules/auto-upgrade.nix
       "${inputs.secrets}/modules/opkssh.nix"
       # Include the results of the hardware scan.
@@ -33,31 +29,6 @@
       ca_pin = config.age.secrets."teleport-ca_pin".path;
       auth_token = config.age.secrets."teleport-join_token".path;
     };
-  };
-
-  virtualisation.oci-containers.containers.portainer_agent.environmentFiles = [ config.age.secrets."portainer-join_token".path ];
-
-  services = {
-    pangolin = {
-      dnsProvider = "netcup";
-      baseDomain = "juliusfr.eu";
-      letsEncryptEmail = "contact@jfreudenberger.de";
-      environmentFile = config.age.secrets."pangolin".path;
-    };
-    traefik = {
-      environmentFiles = [ config.age.secrets."netcup-dns".path ];
-    };
-  };
-
-  services.newt-docker = {
-    enable = true;
-    pangolinEndpoint = "https://pangolin.juliusfr.eu";
-    connectionSecret = config.age.secrets."newt";
-  };
-
-  services.dockhand = {
-    enable = true;
-    appUrl = "dockhand.juliusfr.eu";
   };
 
   systemd.network = {

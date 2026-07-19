@@ -18,6 +18,7 @@ resource "proxmox_vm_qemu" "truenas" {
   scsihw             = "virtio-scsi-pci"
   boot               = "order=scsi0;ide0"
   start_at_node_boot = true
+  agent              = 1
 
   cpu {
     cores   = var.cpu_cores

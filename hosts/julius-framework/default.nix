@@ -17,7 +17,6 @@
       ../../modules/boot-login.nix
       ../../modules/fonts.nix
       ../../modules/cli-essentials.nix
-      ../../modules/i3.nix
       ../../modules/sway.nix
       ../../modules/fingerprint.nix
       ../../modules/logitech.nix

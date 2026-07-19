@@ -37,11 +37,46 @@ module "nixos-docker" {
   name          = "nixos-docker"
   target_node   = "busch"
   vmid          = 101
-  memory        = 4096
+  memory        = 8192
+  balloon       = 2048
   cpu_cores     = 2
   disk_storage  = "truenas-lvm"
   disk_size     = "64G"
   iso_path      = "local:iso/latest-nixos-minimal-x86_64-linux.iso"
   startup_order = 2
-  startup_delay = 240
+  startup_delay = 300
+}
+
+module "docker-gpu" {
+  source = "./modules/proxmox-vm"
+
+  name          = "docker-gpu"
+  target_node   = "busch"
+  vmid          = 102
+  memory        = 8192
+  balloon       = 3072
+  cpu_cores     = 2
+  disk_storage  = "truenas-lvm"
+  disk_size     = "64G"
+  iso_path      = "local:iso/latest-nixos-minimal-x86_64-linux.iso"
+  startup_order = 2
+  startup_delay = 300
+
+  # mapped_pcie_devices = ["gpu"]
+}
+
+module "nixos-native" {
+  source = "./modules/proxmox-vm"
+
+  name          = "nixos-native"
+  target_node   = "busch"
+  vmid          = 103
+  memory        = 8192
+  balloon       = 3072
+  cpu_cores     = 2
+  disk_storage  = "truenas-lvm"
+  disk_size     = "32G"
+  iso_path      = "local:iso/latest-nixos-minimal-x86_64-linux.iso"
+  startup_order = 2
+  startup_delay = 300
 }

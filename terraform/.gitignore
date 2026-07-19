@@ -36,6 +36,7 @@ override.tofu.json
 
 # Include tfplan files to ignore the plan output of command: tofu plan -out=tfplan
 # example: *tfplan*
+**/*plan*
 
 # Ignore CLI configuration files
 .terraformrc

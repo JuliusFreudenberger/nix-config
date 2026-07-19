@@ -8,6 +8,7 @@
     wget
     curl
     git
+    jujutsu
     fastfetch
     tealdeer
 

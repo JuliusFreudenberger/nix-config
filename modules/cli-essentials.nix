@@ -9,6 +9,7 @@
     curl
     dig
     git
+    jujutsu
     fastfetch
     bat
     tealdeer

@@ -63,6 +63,9 @@
       proxy = {
         domain = "netbird.jfreudenberger.de";
         token-secret = config.age.secrets.netbird-proxy;
+        extraPorts = [
+          "222:222/tcp" # Forgejo SSH routing
+        ];
       };
     };
     netbird.server = let

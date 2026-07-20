@@ -21,6 +21,10 @@
       pkgs.tinymist
       pkgs.tofu-ls
       pkgs.ltex-ls-plus
+      pkgs.vtsls
+      pkgs.vscode-langservers-extracted
+      pkgs.vscode-json-languageserver
+      pkgs.package-version-server
     ];
     userSettings = {
       theme = {

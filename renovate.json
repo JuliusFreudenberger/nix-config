@@ -8,7 +8,7 @@
       "groupName": "netbird"
     },
     {
-      "matchSourceUrls": "git+ssh://git@git.jfreudenberger.de/JuliusFreudenberger/nix-private.git",
+      "matchPackageNames": "ssh://git@git.jfreudenberger.de/JuliusFreudenberger/nix-private.git",
       "enabled": false
     }
   ],

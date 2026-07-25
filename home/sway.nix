@@ -40,6 +40,7 @@ in {
       input = {
         "*" = {
           xkb_layout = "eu";
+          xkb_numlock = "enabled";
         };
         "type:touchpad" = {
           tap = "enabled";

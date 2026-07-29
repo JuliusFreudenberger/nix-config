@@ -30,11 +30,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780814819,
-        "narHash": "sha256-tCqZRB4pvZlcz2cMi7mfvhFRsfdkbFMP67jGNciogmc=",
+        "lastModified": 1785055078,
+        "narHash": "sha256-yaA/YM0SVIDCWOZi12R6qryWmPCI6zIYEHoyK0QdOos=",
         "owner": "AdnanHodzic",
         "repo": "auto-cpufreq",
-        "rev": "f325b2a221ab9adb5bb729a1e5d7a45aea686382",
+        "rev": "8552550677ec6bd2528c37697635e1759da2ebd5",
         "type": "github"
       },
       "original": {
@@ -174,11 +174,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1784322176,
-        "narHash": "sha256-GbwlyCMD+nWBr2UPw1MLvqzPePX5jPIzW1D20zfNFCE=",
-        "rev": "294fb728adcc51987f6c63f8f2d27f602c46f915",
+        "lastModified": 1785267976,
+        "narHash": "sha256-SwjaSeXgB4MFsn3VdaPn2qDjvme62JXEL3AnvGYMILo=",
+        "rev": "0f1da2c130f2524756839a2822fe79e990535d54",
         "type": "tarball",
-        "url": "https://codeberg.org/api/v1/repos/niklaskorz/nix-gram-extensions/archive/294fb728adcc51987f6c63f8f2d27f602c46f915.tar.gz"
+        "url": "https://codeberg.org/api/v1/repos/niklaskorz/nix-gram-extensions/archive/0f1da2c130f2524756839a2822fe79e990535d54.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -277,11 +277,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1784100666,
-        "narHash": "sha256-HF/mrw5NYQfKFZgkfV2h1UL5/E3ccfsE2XJ1AbbLLJ0=",
+        "lastModified": 1785232496,
+        "narHash": "sha256-65EQYIRRpTdpH8lUiB6Mvo5uBkG60aBIzAJuALfx+O0=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "fccfa9031a85b78a437f2f153c1f6449f3bc3185",
+        "rev": "2e790b0a6be8ec2b76174ac0931b8ff11919ec98",
         "type": "github"
       },
       "original": {
@@ -357,11 +357,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1784120854,
-        "narHash": "sha256-KesHgItiZPgGX740axSiQLcIQ8D24MDqNpkKYWIek8k=",
+        "lastModified": 1785090369,
+        "narHash": "sha256-m0pDuRJG7EDo9ri+4Ksu83VsI+PlxNC9lNBfydejce4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "753cc8a3a87467296ddd1fa93f0cc3e81120ee46",
+        "rev": "624af665418d3c65d544145b4d34ad696439570e",
         "type": "github"
       },
       "original": {
@@ -386,11 +386,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1784160687,
-        "narHash": "sha256-iYL/bixrb6FlHFu/gIuBYzq6c6lM5AAXsXNSWXtIgQc=",
+        "lastModified": 1785133411,
+        "narHash": "sha256-Yjv0WEg39KRYS0rBdTbu6Fc/or/ihAKk13W9sQ6VWd0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "4382ed2b7a6839d4280a9b386db49cbc5907414d",
+        "rev": "2f5a153c270b70cb0f8c11f46d96d6d3bc39f4e3",
         "type": "github"
       },
       "original": {
@@ -509,11 +509,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1784411728,
-        "narHash": "sha256-gC9WWL9FBGG2wm+cmeeYLuHmhfaj7Py15iSkKkeSWLE=",
+        "lastModified": 1784755101,
+        "narHash": "sha256-aM3PUQP8nw/gCg8D/V15fHxQb17x4CCLk3W9AQJ4vwY=",
         "ref": "refs/heads/main",
-        "rev": "2cf90c5c7ad4d13f2116ae7e77febfe64b717850",
-        "revCount": 42,
+        "rev": "64e92f743af1cb366b91a2fe7880fd0c109ab26b",
+        "revCount": 45,
         "type": "git",
         "url": "ssh://git@git.jfreudenberger.de/JuliusFreudenberger/nix-private.git"
       },

@@ -10,6 +10,7 @@
     extensions = with gram-extensions; [
       typst
       git-firefly
+      vue
     ];
     extensions-dir = gram-extensions.linkGramExtensions extensions;
   in {
@@ -25,6 +26,8 @@
       pkgs.vscode-langservers-extracted
       pkgs.vscode-json-languageserver
       pkgs.package-version-server
+      pkgs.vue-language-server
+      pkgs.nodejs
     ];
     userSettings = {
       theme = {

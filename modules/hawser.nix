@@ -35,6 +35,7 @@ in {
           STACKS_DIR = "/opt/hawser-stacks";
           DOCKHAND_SERVER_URL = cfg.dockhandServerUrl;
           AGENT_NAME = cfg.agentName;
+          REQUEST_TIMEOUT = "120";
         };
         environmentFiles = [
           cfg.tokenSecretFile.path

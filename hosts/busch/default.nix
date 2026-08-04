@@ -118,6 +118,20 @@
     };
   };
 
+  systemd.services.disable-tso-enp0s25 = {
+    description = "Disable TSO on enp0s25";
+
+    wantedBy = [ "multi-user.target" ];
+    after = [ "systemd-udev-settle.service" ];
+    wants = [ "systemd-udev-settle.service" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.ethtool}/bin/ethtool -K enp0s25 tso off";
+      RemainAfterExit = true;
+    };
+  };
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   # Most users should NEVER change this value after the initial install, for any reason,

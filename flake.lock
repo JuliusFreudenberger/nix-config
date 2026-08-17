@@ -509,11 +509,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1784755101,
-        "narHash": "sha256-aM3PUQP8nw/gCg8D/V15fHxQb17x4CCLk3W9AQJ4vwY=",
+        "lastModified": 1786656521,
+        "narHash": "sha256-HIr5sPH5bVp++22UZJbJ3ZFfW3rYyv+JXoJSKg36/l8=",
         "ref": "refs/heads/main",
-        "rev": "64e92f743af1cb366b91a2fe7880fd0c109ab26b",
-        "revCount": 45,
+        "rev": "f33aa17f4cf28f28a422020131aea981eeca386c",
+        "revCount": 46,
         "type": "git",
         "url": "ssh://git@git.jfreudenberger.de/JuliusFreudenberger/nix-private.git"
       },

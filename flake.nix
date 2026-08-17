@@ -125,16 +125,16 @@
         ];
       };
 
-      backup-raspberrypi = nixpkgs.lib.nixosSystem rec {
-        system = "aarch64";
+      odroidc2 = nixpkgs.lib.nixosSystem rec {
+        system = "aarch64-linux";
 
         specialArgs = {
           inherit inputs outputs;
         };
 
         modules = [
-          nixos-hardware.nixosModules.raspberry-pi-4
-          ./hosts/backup-raspberrypi
+          ./hosts/odroidc2
+          agenix.nixosModules.default
         ];
       };
 

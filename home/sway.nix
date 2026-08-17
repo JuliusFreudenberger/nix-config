@@ -139,7 +139,7 @@ in {
       };
       assigns = {
         "6" = [{ app_id = "thunderbird"; }];
-        "5" = [{ app_id = "^element$|^com.slack.Slack$"; }];
+        "5" = [{ app_id = "^element$|^com.slack.Slack$|^discord$"; }];
       };
       floating.criteria = [
         { title = "MuseScore: Play Panel"; }
@@ -192,7 +192,6 @@ in {
       bars = [];
     };
     extraConfig = ''
-      assign [class = "^discord$"] 5
       focus_wrapping yes
     '';
   };

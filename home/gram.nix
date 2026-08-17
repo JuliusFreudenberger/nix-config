@@ -11,6 +11,7 @@
       typst
       git-firefly
       vue
+      ltex
     ];
     extensions-dir = gram-extensions.linkGramExtensions extensions;
   in {

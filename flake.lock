@@ -174,11 +174,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1785267976,
-        "narHash": "sha256-SwjaSeXgB4MFsn3VdaPn2qDjvme62JXEL3AnvGYMILo=",
-        "rev": "0f1da2c130f2524756839a2822fe79e990535d54",
+        "lastModified": 1785427187,
+        "narHash": "sha256-cxiNc+9ApVPIr+m4qBQILWlDrZQLHsYlS7UDjanDhM8=",
+        "rev": "d5433536f75702ae8c402ee17b726545394e455c",
         "type": "tarball",
-        "url": "https://codeberg.org/api/v1/repos/niklaskorz/nix-gram-extensions/archive/0f1da2c130f2524756839a2822fe79e990535d54.tar.gz"
+        "url": "https://codeberg.org/api/v1/repos/niklaskorz/nix-gram-extensions/archive/d5433536f75702ae8c402ee17b726545394e455c.tar.gz"
       },
       "original": {
         "type": "tarball",

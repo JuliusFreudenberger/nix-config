@@ -63,6 +63,7 @@
       proxy = {
         domain = "netbird.jfreudenberger.de";
         token-secret = config.age.secrets.netbird-proxy;
+        crowdsec-key = config.age.secrets.crowdsec-key;
         extraPorts = [
           "222:222/tcp" # Forgejo SSH routing
         ];

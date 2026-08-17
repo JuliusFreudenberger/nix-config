@@ -5,6 +5,7 @@
     pocket-id.file = "${inputs.secrets}/secrets/srv03/pocket-id";
     netbird-server.file = "${inputs.secrets}/secrets/srv03/netbird-server";
     netbird-proxy.file = "${inputs.secrets}/secrets/srv03/netbird-proxy";
+    crowdsec-key.file = "${inputs.secrets}/secrets/srv03/netbird-crowdsec";
     traefik-basic-auth.file = "${inputs.secrets}/secrets/srv03/traefik-basic-auth";
   };
 }

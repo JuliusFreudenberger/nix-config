@@ -31,6 +31,14 @@ in {
               '';
             type = lib.types.anything;
           };
+          crowdsec-key = lib.mkOption {
+            description = ''
+              Crowdsec API key in env-file notation.
+              Name of the environment variable is `NB_PROXY_CROWDSEC_API_KEY`.
+              Create the key inside crowdsec using the command `cscli bouncers add netbird-proxy -o raw`.
+              '';
+            type = lib.types.anything;
+          };
           extraPorts = lib.mkOption {
             description = ''
               Extra ports to open for L4 routing.
@@ -176,9 +184,11 @@ in {
         ] ++ cfg.proxy.extraPorts;
         networks = [
           "traefik"
+          "crowdsec"
         ];
         dependsOn = [
           "netbird-server"
+          "crowdsec"
         ];
         environment = {
           NB_PROXY_MANAGEMENT_ADDRESS="http://netbird-server:80";
@@ -191,9 +201,11 @@ in {
           NB_PROXY_FORWARDED_PROTO = "https";
           NB_PROXY_PROXY_PROTOCOL = "true";
           NB_PROXY_TRUSTED_PROXIES = "172.18.0.2";
+          NB_PROXY_CROWDSEC_API_URL = "http://crowdsec:8080";
         };
         environmentFiles = [
           cfg.proxy.token-secret.path
+          cfg.proxy.crowdsec-key.path
         ];
         extraOptions = [
           ''--mount=type=volume,source=netbird_proxy_certs,target=/certs,volume-driver=local''
@@ -209,6 +221,35 @@ in {
           "traefik.tcp.services.proxy-tls.loadbalancer.serverstransport" = "pp-v2@file";
         };
       };
+      crowdsec = {
+        image = "crowdsecurity/crowdsec:v1.7.7@sha256:6ca53ad26196ca59ddd4fa692a586b73d8fcde085046163b9ca2f04887dca563";
+        autoStart = true;
+        networks = [
+          "crowdsec"
+        ];
+        environment = {
+          COLLECTIONS = "crowdsecurity/linux";
+        };
+        extraOptions = [
+          ''--mount=type=volume,source=crowdsec_config,target=/etc/crowdsec,volume-driver=local''
+          ''--mount=type=volume,source=crowdsec_db,target=/var/lib/crowdsec/data,volume-driver=local''
+          ''--health-cmd=cscli lapi status''
+          ''--health-interval=10s''
+          ''--health-timeout=5s''
+          ''--health-retries=15''
+        ];
+        labels = {
+          "traefik.enable" = "false";
+        };
+      };
+    };
+    systemd.services."docker-network-traefik" = {
+      serviceConfig = {
+        Type = "oneshot";
+      };
+      script = ''
+        docker network inspect crowdsec || docker network create crowdsec
+      '';
     };
   };
 }

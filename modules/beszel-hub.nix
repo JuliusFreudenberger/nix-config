@@ -20,7 +20,7 @@ in {
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers = {
       beszel = {
-        image = "henrygd/beszel:0.18.8@sha256:697010c64d5ea51479437c9366e28a0a77d4223ab4858dc0d8f4d351626c5d32";
+        image = "henrygd/beszel:0.18.8@sha256:4c51486968efa0b0a702c1b0967966a2e06fb250b7418f3072d2488faea27c51";
         autoStart = true;
         networks = [
           "traefik"

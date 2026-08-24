@@ -13,6 +13,8 @@
         "application/yaml" = ["org.x.editor.desktop"];
         "text/plain" = ["org.x.editor.desktop"];
         "text/calendar" = ["thunderbird.desktop"];
+        "application/vnd.oasis.opendocument.text" = ["writer.desktop"];
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = ["writer.desktop"];
       };
     };
     userDirs = {

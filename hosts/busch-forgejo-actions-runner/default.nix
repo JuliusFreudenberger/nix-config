@@ -14,7 +14,6 @@
       ../../modules/server-cli.nix
       ../../modules/sshd.nix
       ../../modules/netbird-client.nix
-      ../../modules/forgejo-actions-runner.nix
       "${inputs.secrets}/modules/opkssh.nix"
 
       # Include the results of the hardware scan.

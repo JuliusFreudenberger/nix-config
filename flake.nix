@@ -215,6 +215,7 @@
           ./hosts/busch-forgejo-actions-runner
           disko.nixosModules.disko
           agenix.nixosModules.default
+          "${inputs.nixpkgs-unstable}/nixos/modules/services/continuous-integration/forgejo-runner.nix"
         ];
       };
 

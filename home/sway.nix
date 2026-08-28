@@ -196,6 +196,12 @@ in {
     '';
   };
 
+  dconf.settings = {
+    "org.gnome.desktop.interface" = {
+      gtk-enable-primary-paste = true;
+    };
+  };
+
   programs.swaylock = {
     enable = true;
     settings = {

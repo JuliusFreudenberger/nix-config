@@ -272,6 +272,22 @@
         ];
       };
 
+      bwcloud-01 = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+
+        specialArgs = {
+          inherit inputs outputs;
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+          };
+        };
+
+        modules = [
+          disko.nixosModules.disko
+          agenix.nixosModules.default
+          ./hosts/bwcloud-01
+        ];
+      };
     };
 
     homeConfigurations = {

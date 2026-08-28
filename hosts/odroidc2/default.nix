@@ -29,6 +29,32 @@
   # Enables the generation of /boot/extlinux/extlinux.conf
   boot.loader.generic-extlinux-compatible.enable = true;
 
+  services.home-assistant = {
+    enable = true;
+    extraComponents = [
+      # Components required to complete the onboarding
+      "analytics"
+      "google_translate"
+      "met"
+      "radio_browser"
+      "shopping_list"
+      # Recommended for fast zlib compression
+      # https://www.home-assistant.io/integrations/isal
+      "isal"
+
+      "mobile_app"
+      "backup"
+      "sun"
+
+      "shelly"
+      "wyoming"
+      "dwd_weather_warnings"
+    ];
+    config = {
+      default_config = {};
+    };
+  };
+
   services.netbird-client = {
     enable = true;
     managementUrl = "https://netbird.jfreudenberger.de";
@@ -52,8 +78,7 @@
 
   networking.firewall = {
     allowedTCPPorts = [
-      # Home assistant
-      8123
+      config.services.home-assistant.config.http.server_port
     ];
   };
 

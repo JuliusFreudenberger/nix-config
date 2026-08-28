@@ -38,6 +38,7 @@
       };
       hour_format = "hour24";
       vim_mode = true;
+      relative_line_numbers = "wrapped";
       load_direnv = "shell_hook";
 
       lsp = {

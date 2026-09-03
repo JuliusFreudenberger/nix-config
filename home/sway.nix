@@ -118,6 +118,7 @@ in {
           "k" = "exec flatpak run com.slack.Slack";
           "e" = "exec element-desktop --password-store=gnome-libsecret";
           "Shift+e" = "exec element-desktop --password-store=gnome-libsecret --profile=JuliusFreudenberger";
+          "Ctrl+e" = "exec element-desktop --password-store=gnome-libsecret --profile=hka";
           "n" = "exec nextcloud";
           "m" = "exec flatpak run com.spotify.Client";
           "b" = "exec blueman";

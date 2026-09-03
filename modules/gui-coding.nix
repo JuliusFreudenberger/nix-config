@@ -8,7 +8,6 @@
     jetbrains.pycharm
 
     vscodium-fhs
-    zed-editor.fhs
 
     k6
 

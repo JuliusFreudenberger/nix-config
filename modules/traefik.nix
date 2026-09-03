@@ -53,6 +53,7 @@ in {
           "--certificatesresolvers.letsencrypt.acme.storage=/certs/acme.json"
           "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
           "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=${cfg.dnsChallengeProvider}"
+          "--certificatesresolvers.letsencrypt.acme.dnschallenge.propagation.requireALLRNS=false" # https://github.com/traefik/traefik/issues/13697#issuecomment-5346551729
           "--providers.file.filename=/dynamic-config/providers.yaml"
         ];
         autoStart = true;

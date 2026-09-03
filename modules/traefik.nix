@@ -108,7 +108,8 @@ in {
       };
     };
 
-    systemd.services."docker-traefik" = {
+    systemd.services.${config.virtualisation.oci-containers.containers.traefik.serviceName} = {
+      restartIfChanged = false;
       after = [
         "docker-network-traefik.service"
         "docker-network-docker-socket.service"

@@ -58,6 +58,8 @@ in {
       };
     };
 
+    systemd.services.netbird-wt0.restartIfChanged = lib.mkIf (cfg.host.setupKey != null) false;
+
     services.resolved.enable = lib.mkIf (cfg.host.setupKey != null) true;
 
     virtualisation.oci-containers.containers = lib.mkIf (cfg.docker.setupKey != null) {

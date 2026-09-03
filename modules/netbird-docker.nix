@@ -251,5 +251,9 @@ in {
         docker network inspect crowdsec || docker network create crowdsec
       '';
     };
+
+    systemd.services.${config.virtualisation.oci-containers.containers.netbird-dashboard.serviceName}.restartIfChanged = false;
+    systemd.services.${config.virtualisation.oci-containers.containers.netbird-server.serviceName}.restartIfChanged = false;
+    systemd.services.${config.virtualisation.oci-containers.containers.netbird-proxy.serviceName}.restartIfChanged = false;
   };
 }

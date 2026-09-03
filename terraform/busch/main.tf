@@ -80,3 +80,19 @@ module "nixos-native" {
   startup_order = 2
   startup_delay = 300
 }
+
+module "forgejo-actions-runner" {
+  source = "./modules/proxmox-vm"
+
+  name          = "forgejo-actions-runner"
+  target_node   = "busch"
+  vmid          = 201
+  memory        = 8192
+  balloon       = 1024
+  cpu_cores     = 2
+  disk_storage  = "truenas-lvm"
+  disk_size     = "64G"
+  iso_path      = "local:iso/latest-nixos-minimal-x86_64-linux.iso"
+  startup_order = 2
+  startup_delay = 300
+}

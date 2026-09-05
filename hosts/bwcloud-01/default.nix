@@ -24,6 +24,7 @@
 
   services.traefik-docker = {
     enable = true;
+    enableCrowdsec = true;
     dashboardUrl = "dashboard.juliusfr.eu";
     dnsChallengeProvider = "netcup";
     dnsSecrets = [

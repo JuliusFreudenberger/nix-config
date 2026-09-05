@@ -8,6 +8,8 @@ let
 
   cfg = config.services.traefik-docker;
 
+  bouncerKey = "crowdsecbouncerkeytraefik";
+
 in {
 
   options.services.traefik-docker = {
@@ -24,6 +26,7 @@ in {
       description = "Name of provider for DNS challenge.";
       type = lib.types.str;
     };
+    enableCrowdsec = lib.mkEnableOption "crowdsec and traefik bouncer plugin";
   };
 
   config = lib.mkIf cfg.enable {
@@ -55,8 +58,12 @@ in {
           "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=${cfg.dnsChallengeProvider}"
           "--certificatesresolvers.letsencrypt.acme.dnschallenge.propagation.requireALLRNS=false" # https://github.com/traefik/traefik/issues/13697#issuecomment-5346551729
           "--providers.file.filename=/dynamic-config/providers.yaml"
+        ] ++ lib.optionals cfg.enableCrowdsec [
+          "--experimental.plugins.bouncer.modulename=github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
+          "--experimental.plugins.bouncer.version=v1.7.1"
         ];
         autoStart = true;
+        dependsOn = lib.mkIf cfg.enableCrowdsec [ "crowdsec" ];
         ports = [
           "80:80"
           "443:443"
@@ -64,6 +71,8 @@ in {
         networks = [
           "traefik"
           "docker-socket"
+        ] ++ lib.optionals cfg.enableCrowdsec [
+          "crowdsec"
         ];
         labels = {
           "traefik.enable" = "true";
@@ -77,10 +86,20 @@ in {
           traefik-providers-config = (pkgs.formats.yaml {}).generate "traefik-providers-config" {
             tcp.serversTransports.pp-v2.proxyProtocol.version = 2;
           };
+          traefik-crowdsec-plugin-config = (pkgs.formats.yaml {}).generate "traefik-crowdsec-plugin-config" {
+            http.middlewares.crowdsec.plugin.bouncer = {
+              enabled = true;
+              crowdseclapikey = bouncerKey;
+              crowdsecmode = "stream";
+              loglevel = "INFO";
+            };
+          };
         in [
           "/var/run/docker.sock:/var/run/docker.sock"
           "${traefik-providers-config}:/dynamic-config/providers.yaml:ro"
           "/run/traefik/basicAuth.yaml:/dynamic-config/basicAuth.yaml:ro"
+        ] ++ lib.optionals cfg.enableCrowdsec [
+          "${traefik-crowdsec-plugin-config}:/dynamic-config/crowdsec.yaml:ro"
         ];
         extraOptions = [
           ''--mount=type=volume,source=certs,target=/certs,volume-driver=local''
@@ -106,6 +125,28 @@ in {
           "/var/run/docker.sock:/var/run/docker.sock:ro"
         ];
       };
+      crowdsec = lib.mkIf cfg.enableCrowdsec {
+        image = "crowdsecurity/crowdsec:v1.7.7@sha256:6ca53ad26196ca59ddd4fa692a586b73d8fcde085046163b9ca2f04887dca563";
+        autoStart = true;
+        networks = [
+          "crowdsec"
+        ];
+        environment = {
+          COLLECTIONS = "crowdsecurity/traefik";
+          BOUNCER_KEY_traefik = bouncerKey;
+        };
+        extraOptions = [
+          ''--mount=type=volume,source=crowdsec_config,target=/etc/crowdsec,volume-driver=local''
+          ''--mount=type=volume,source=crowdsec_db,target=/var/lib/crowdsec/data,volume-driver=local''
+          ''--health-cmd=cscli lapi status''
+          ''--health-interval=10s''
+          ''--health-timeout=5s''
+          ''--health-retries=15''
+        ];
+        labels = {
+          "traefik.enable" = "false";
+        };
+      };
     };
 
     systemd.services.${config.virtualisation.oci-containers.containers.traefik.serviceName} = {
@@ -113,10 +154,14 @@ in {
       after = [
         "docker-network-traefik.service"
         "docker-network-docker-socket.service"
+      ] ++ lib.optionals cfg.enableCrowdsec [
+        "docker-network-crowdsec.service"
       ];
       requires = [
         "docker-network-traefik.service"
         "docker-network-docker-socket.service"
+      ] ++ lib.optionals cfg.enableCrowdsec [
+        "docker-network-crowdsec.service"
       ];
     };
 
@@ -145,7 +190,7 @@ EOF
     };
 
     systemd.services."docker-network-traefik" = {
-      path = [ pkgs.docker_29 ];
+      path = [ pkgs.docker ];
       serviceConfig = {
         Type = "oneshot";
       };
@@ -155,12 +200,22 @@ EOF
     };
 
     systemd.services."docker-network-docker-socket" = {
-      path = [ pkgs.docker_29 ];
+      path = [ pkgs.docker ];
       serviceConfig = {
         Type = "oneshot";
       };
       script = ''
         docker network inspect docker-socket || docker network create docker-socket --ipv4 --ipv6 --subnet=172.19.0.0/16 --gateway=172.19.0.1
+      '';
+    };
+
+    systemd.services."docker-network-crowdsec" = lib.mkIf cfg.enableCrowdsec {
+      path = [ pkgs.docker ];
+      serviceConfig = {
+        Type = "oneshot";
+      };
+      script = ''
+        docker network inspect crowdsec || docker network create crowdsec
       '';
     };
 

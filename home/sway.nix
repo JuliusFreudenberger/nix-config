@@ -255,7 +255,7 @@ in {
           "format" = " {volume}%";
           "format-muted" = " MUTE";
           "scroll-step" = 5;
-          "on-right-click" = sinkToggle;
+          "on-click-right" = sinkToggle;
         };
         "pulseaudio#source" = {
           "format" = "{format_source}";
@@ -264,7 +264,7 @@ in {
           "tooltip-format" = "{source_desc}";
           "scroll-step" = 5;
           "target" = "source";
-          "on-right-click" = sourceToggle;
+          "on-click-right" = sourceToggle;
         };
         "network" = {
           "interface" = "wl*";

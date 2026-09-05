@@ -273,6 +273,11 @@ in {
         };
         "memory" = {
           "format" = " {used:0.1f}G/{total:0.1f}G ({percentage}%)";
+          "states" = {
+            "full" = 90;
+            "almost" = 80;
+            "warning" = 70;
+          };
         };
         "cpu" = {
           "format" = " {usage}%";
@@ -299,6 +304,13 @@ in {
             "charging" = ["CHR"];
           };
           "format-time" = "{H:02d}:{M:02d}";
+          "states" = {
+            "quasi-full" = 75;
+            "half" = 60;
+            "warning" = 40;
+            "critical" = 20;
+            "empty" = 5;
+          };
         };
         "backlight" = {
           "format" = "{icon} {percent}%";
@@ -403,9 +415,18 @@ in {
     #cpu.high {
         color: #fffc00;
     }
-
     #cpu.intensive {
         color: #ff0000;
+    }
+
+    #memory.full {
+        color: #ff0000;
+    }
+    #memory.almost {
+        color: #ffae00;
+    }
+    #memory.warning {
+        color: #fff600;
     }
 
     #pulseaudio.sink.muted {
@@ -413,6 +434,23 @@ in {
     }
     #pulseaudio.source.source-muted {
         color: #ff0000;
+    }
+
+    #battery.quasi-full:not(.charging) {
+        color: #a8ff00;
+    }
+    #battery.half:not(.charging) {
+        color: #fff600;
+    }
+    #battery.warning:not(.charging) {
+        color: #ffae00;
+    }
+    #battery.critical:not(.charging) {
+        color: #ff0000;
+    }
+    #battery.empty:not(.charging) {
+        color: #ffffff;
+        background-color: #ff0000;
     }
 '';
   };

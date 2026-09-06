@@ -2,15 +2,15 @@
   inputs,
   pkgs,
   lib,
+  config,
   ...
 }: {
   system.autoUpgrade = {
     enable = true;
     flags = [
-      "--recreate-lock-file" # Deprecated, but will hopefully be reintroduced
       "-L"
     ];
-    flake = inputs.self.outPath;
+    flake = "https://git.jfreudenberger.de/JuliusFreudenberger/nix-config/archive/main.tar.gz#${config.networking.hostName}";
     dates = "02:00";
     randomizedDelaySec = "45min";
     allowReboot = lib.mkDefault true;

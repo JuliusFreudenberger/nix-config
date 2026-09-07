@@ -11,8 +11,8 @@
       "-L"
     ];
     flake = "https://git.jfreudenberger.de/JuliusFreudenberger/nix-config/archive/main.tar.gz#${config.networking.hostName}";
-    dates = "02:00";
-    randomizedDelaySec = "45min";
+    dates = lib.mkDefault "03:00";
+    randomizedDelaySec = lib.mkDefault "45min";
     allowReboot = lib.mkDefault true;
     rebootWindow = {
       lower = "01:00";

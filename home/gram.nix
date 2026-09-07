@@ -15,7 +15,7 @@
     ];
     extensions-dir = gram-extensions.linkGramExtensions extensions;
   in {
-  programs.zed-editor = {
+  programs.gram = {
     enable = true;
     package = pkgs-unstable.gram;
     extraPackages = [
@@ -30,9 +30,9 @@
       pkgs.vue-language-server
       pkgs.nodejs
     ];
-    userSettings = {
+    settings = {
       theme = {
-        mode = "system";
+        mode = "dark";
         dark = "One Dark";
         light = "One Light";
       };

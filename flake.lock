@@ -213,11 +213,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784409593,
-        "narHash": "sha256-PZ+Xc0Q2MRdR0Dsorwgc7Zi2ST++a8mOTvwewrn2hXw=",
+        "lastModified": 1788810731,
+        "narHash": "sha256-ddt/MIa2wbRzjf9feCnhYU5b8k5cHtmERXndelbdiwU=",
         "owner": "JuliusFreudenberger",
         "repo": "home-manager",
-        "rev": "8cc72ea0c4253217b3233db54c65e72848a5eaee",
+        "rev": "c0f4fd7fe777ce5c7de2d08e8adccb9a33f437b9",
         "type": "github"
       },
       "original": {

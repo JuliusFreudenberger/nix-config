@@ -408,10 +408,6 @@ in {
         margin: 0px 0px 0px 0px;
     }
 
-    #battery.critical {
-        color: #ff5555;
-    }
-
     #cpu.high {
         color: #fffc00;
     }

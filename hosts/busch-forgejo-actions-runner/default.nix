@@ -63,7 +63,7 @@
           runner.labels = [
             "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-24.04@sha256:5d6a17640b25694988b9db5a4145537b9918e5430116b2cf90d84e837609b382"
             "debian:docker://docker.io/library/node:lts@sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059"
-            "nix-stable:docker://nixos/nix:2.35.1@sha256:377d4887aca98f0dfa12971c1ea6d6a625a435d8b610d4c95a436843da6fbfd1"
+            "nix-stable:docker://codeberg.org/lucacesari/nix-images/forgejo-nix-flake:latest@sha256:92502f0e1ce3756e1e0442a041b5a69b2629ebf0c452267c725e59f449cc144d"
           ];
         };
       };

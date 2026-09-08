@@ -301,6 +301,10 @@
 
         extraSpecialArgs = {
           inherit username;
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+          };
+          gram-extensions = gram-extensions.packages.${system};
         };
 
         modules = [
@@ -313,6 +317,7 @@
           home/zsh/default.nix
           home/cli.nix
           home/gui.nix
+          home/gram.nix
           home/java-dev.nix
 
           home/direnv/default.nix

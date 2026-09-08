@@ -23,6 +23,8 @@
       pkgs.tinymist
       pkgs.tofu-ls
       pkgs.ltex-ls-plus
+      pkgs.basedpyright
+      pkgs.ruff
       pkgs.vtsls
       pkgs.vscode-langservers-extracted
       pkgs.vscode-json-languageserver

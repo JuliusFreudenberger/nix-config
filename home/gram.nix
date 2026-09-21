@@ -41,6 +41,8 @@
       hour_format = "hour24";
       vim_mode = true;
       relative_line_numbers = "wrapped";
+      minimap.show = "auto";
+      colorize_brackets = true;
       load_direnv = "shell_hook";
 
       lsp = {
@@ -49,9 +51,11 @@
             exportPdf = "onSave";
             outputPath = "$root/$name";
             preview.background.enabled = true;
+            projectResolution = "lockDatabase";
           };
           initialization_options = {
             preview.background.enabled = true;
+            projectResolution = "lockDatabase";
           };
         };
       };

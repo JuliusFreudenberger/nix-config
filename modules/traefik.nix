@@ -32,7 +32,7 @@ in {
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers = {
       traefik = {
-        image = "traefik:v3.7.13@sha256:1c32e7c368204fd72812152ebdd2ac0425993df6fd982317deb02e48f2d5423c";
+        image = "traefik:v3.7.13@sha256:24841fe2de7304c149343d877d2923b4c8800a38ba015dea9174c23b20e344a0";
         cmd = [
           "--providers.docker=true"
           "--providers.docker.endpoint=http://docker-socket-proxy:2375"

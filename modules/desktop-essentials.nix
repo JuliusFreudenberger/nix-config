@@ -11,7 +11,7 @@
 
     evince
     zathura
-    viewnior
+    eom
     pavucontrol
 
     xed-editor

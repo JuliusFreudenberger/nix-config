@@ -5,10 +5,10 @@
       enable = true;
       defaultApplications = {
         "application/pdf" = ["org.gnome.Evince.desktop"];
-        "image/svg+xml" = ["viewnior.desktop"];
-        "image/jpeg" = ["viewnior.desktop"];
-        "image/png" = ["viewnior.desktop"];
-        "image/tiff" = ["viewnior.desktop"];
+        "image/svg+xml" = ["eom.desktop"];
+        "image/jpeg" = ["eom.desktop"];
+        "image/png" = ["eom.desktop"];
+        "image/tiff" = ["eom.desktop"];
         "video/quicktime" = ["vlc.desktop"]; # *.mov
         "application/yaml" = ["org.x.editor.desktop"];
         "text/plain" = ["org.x.editor.desktop"];

@@ -6,7 +6,7 @@
     ../../home/zsh
     ../../home/neovim
     ../../home/gtk
-    ../../home/ebook.nix
+    #../../home/ebook.nix
     ../../home/xdg
     ../../home/sway.nix
     ../../home/kanshi.nix

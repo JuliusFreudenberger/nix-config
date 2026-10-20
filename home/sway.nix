@@ -473,4 +473,6 @@ in {
     latitude = osConfig.location.latitude;
     longitude = osConfig.location.longitude;
   };
+
+  services.playerctld.enable = true; # Needed for default player for waybar mpris
 }

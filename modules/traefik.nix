@@ -95,7 +95,6 @@ in {
             };
           };
         in [
-          "/var/run/docker.sock:/var/run/docker.sock"
           "${traefik-providers-config}:/dynamic-config/providers.yaml:ro"
           "/run/traefik/basicAuth.yaml:/dynamic-config/basicAuth.yaml:ro"
         ] ++ lib.optionals cfg.enableCrowdsec [

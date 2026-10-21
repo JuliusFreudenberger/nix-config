@@ -17,7 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers = {
       pocket-id = {
-        image = "ghcr.io/pocket-id/pocket-id:v2.18.0@sha256:323e7ef5bfacf7cf32f22f3d10ccdf48e0c97c94d67e7e40b0b996830deb5165";
+        image = "ghcr.io/pocket-id/pocket-id:v2.19.0@sha256:f7299b41ed76d1cf46fd5befc7db660eaa12162dc8af2632d5e23fa78708266a";
         autoStart = true;
         networks = [
           "traefik"

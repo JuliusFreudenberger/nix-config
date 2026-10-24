@@ -65,7 +65,7 @@ in {
     services.netbird.useRoutingFeatures = lib.mkDefault "server";
     virtualisation.oci-containers.containers = {
       netbird-dashboard = {
-        image = "netbirdio/dashboard:v2.94.0";
+        image = "netbirdio/dashboard:v2.95.0";
         autoStart = true;
         networks = [
           "traefik"
@@ -99,7 +99,7 @@ in {
         ];
       };
       netbird-server = {
-        image = "netbirdio/netbird-server:0.80.0@sha256:05b3d8d6d056e5062a2965d4d6e5d6d83f09f2bf9133947a8e5972e0e0e7a261";
+        image = "netbirdio/netbird-server:0.81.4@sha256:d456702621ab1325313f711fc0264b3990a57daa872245acbe4469bc3e69d698";
         autoStart = true;
         networks = [
           "traefik"
@@ -177,7 +177,7 @@ in {
         ];
       };
       netbird-proxy = {
-        image = "netbirdio/reverse-proxy:0.80.0@sha256:6d6655b3f13f837d80cc44878033866713932d3c5c1381ed869af9542b523bc5";
+        image = "netbirdio/reverse-proxy:0.81.4@sha256:ad7f25b3cd55b77489d416d466e853cab3f4b66c82bf265d60fdd52f265484aa";
         autoStart = true;
         ports = [
           "51820:51820/udp"

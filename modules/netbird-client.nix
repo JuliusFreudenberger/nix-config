@@ -64,7 +64,7 @@ in {
 
     virtualisation.oci-containers.containers = lib.mkIf (cfg.docker.setupKey != null) {
       netbird = {
-        image = "netbirdio/netbird:0.81.4-rootless@sha256:75127ab9bdd13c59006a4c1b1c3a9521f858c9bdab083508ec17632b7f2e40a1";
+        image = "netbirdio/netbird:0.81.5-rootless@sha256:31686f0326732641702a6dc9e6fdc08820a2873f477c58f9f17c8883dad01597";
         autoStart = true;
         hostname = "${config.networking.hostName}-docker";
         networks = [

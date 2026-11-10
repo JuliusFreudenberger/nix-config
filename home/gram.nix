@@ -31,6 +31,7 @@
       pkgs.package-version-server
       pkgs.vue-language-server
       pkgs.nodejs
+      pkgs.lemminx
     ];
     settings = {
       theme = {

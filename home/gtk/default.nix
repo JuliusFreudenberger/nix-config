@@ -1,6 +1,7 @@
 {config, pkgs, ...}: {
   gtk = {
     enable = true;
+    colorScheme = "dark";
     theme.name = "Adwaita-dark";
     iconTheme = {
       name = "Arc";
